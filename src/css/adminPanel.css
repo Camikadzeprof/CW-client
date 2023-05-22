@@ -1,0 +1,28 @@
+.main_content .info .list-group-item {
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    font-size: large;
+
+}
+
+.main_content .info .list-buttons {
+    padding-top: 40px;
+}
+
+.main_content .info #list-span {
+    display: flex;
+    justify-content: space-between;
+}
+
+.main_content .info #list-span span {
+    width: 300px;
+}
+
+.main_content .info #list-span span:not(:first-child) {
+    margin-left: 50px;
+}
+
+.main_content .info .btn-primary {
+    margin-top: 10px;
+}
