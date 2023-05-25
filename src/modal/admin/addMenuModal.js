@@ -42,47 +42,47 @@ const AddMenuModal = ({closeCallback, showAddMenuModal}) => {
                 keyboard={false}
             >
                 <Modal.Header>
-                    <Modal.Title>Add Food</Modal.Title>
+                    <Modal.Title>Добавить блюдо</Modal.Title>
                 </Modal.Header>
                 <form onSubmit={addMenuSubmit}>
                     <Modal.Body>
                         <div className="mb3">
-                            <label htmlFor="name-input" className="form-label">Food Name</label>
+                            <label htmlFor="name-input" className="form-label">Название блюда</label>
                             <input type="text" className="form-control" name="name" id="name-input"
-                                   placeholder="Name" value={nameValue}
+                                   placeholder="Название" value={nameValue}
                                    onChange={(event) => setNameValue(event.target.value)}/>
                         </div>
                         <div className="mb3">
-                            <label htmlFor="type-input" className="form-label">Food Name</label>
+                            <label htmlFor="type-input" className="form-label">Тип блюда</label>
                             <input type="text" className="form-control" name="name" id="type-input"
-                                   placeholder="Type" value={typeValue}
+                                   placeholder="Тип" value={typeValue}
                                    onChange={(event) => setTypeValue(event.target.value)}/>
                         </div>
                         <div className="mb3">
-                            <label htmlFor="img-input" className="form-label">Image</label>
+                            <label htmlFor="img-input" className="form-label">изображение</label>
                             <input type="text" className="form-control" id="img-input"
                                    aria-describedby="imgHelp" value={imgValue}
                                    onChange={e => setImgValue(e.target.value)}/>
-                            <div id="imgHelp" className="form-text">Enter the image URL.
+                            <div id="imgHelp" className="form-text">Введите URL изображения.
                             </div>
                         </div>
                         <div className="mb-3">
-                            <label htmlFor="description-input" className="form-label">Description</label>
+                            <label htmlFor="description-input" className="form-label">Описание</label>
                             <input type="text" className="form-control" id="description-input"
-                                   placeholder="Description" value={descriptionValue}
+                                   placeholder="Описание" value={descriptionValue}
                                    onChange={e => setDescriptionValue(e.target.value)}/>
                         </div>
                         <div className="mb-3">
-                            <label htmlFor="price-input" className="form-label">Price</label>
+                            <label htmlFor="price-input" className="form-label">Цена</label>
                             <input type="text" className="form-control" id="price-input"
-                                   placeholder="Price" value={priceValue}
-                                   onChange={e => setPriceValue(e.target.value)}/>
+                                   placeholder="Цена" value={priceValue}
+                                   onChange={e => setPriceValue(e.target.value)}/> BYN
                         </div>
                     </Modal.Body>
                     <Modal.Footer>
-                        <input className="btn btn-success" type="submit" value="Add Food"/>
+                        <input className="btn btn-success" type="submit" value="Добавить"/>
                         <Button variant="secondary" onClick={closeCallback}>
-                            Close
+                            Закрыть
                         </Button>
                     </Modal.Footer>
                 </form>

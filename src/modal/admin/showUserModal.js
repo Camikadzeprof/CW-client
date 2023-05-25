@@ -34,7 +34,7 @@ const ShowUserModal = ({closeCallback, userId}) => {
                             <p id="email-input">{emailValue}</p>
                         </div>
                         <div className="mb-3">
-                            <label htmlFor="phone-input" className="form-label"><b>Phone</b></label>
+                            <label htmlFor="phone-input" className="form-label"><b>Телефон</b></label>
                             <p id="phone-input">{phoneValue}</p>
                         </div>
                     </div>

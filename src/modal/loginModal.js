@@ -34,7 +34,7 @@ const LoginModal = ({closeCallback}) => {
                 localStorage.setItem('token', user.token);
             })
             .catch(e => {
-                alert('Please check field correctness');
+                alert('Проверьте корректность введенных данных');
             })
     }
     useEffect(() => {
@@ -47,22 +47,22 @@ const LoginModal = ({closeCallback}) => {
             <ModalCloseButton closeCallback={closeCallback}/>
             <form onSubmit={checkFields}>
                 <div className="login-div">
-                    <p className="login-paragraph" align="center">Log in</p>
+                    <p className="login-paragraph" align="center">Войти</p>
                     <div className="container">
                         <div className="mb-3">
-                            <label htmlFor="login-input" className="form-label">Login</label>
+                            <label htmlFor="login-input" className="form-label">Логин</label>
                             <input type="text" className="form-control" name="login" id="login-input"
-                                   placeholder="login" value={login}
+                                   placeholder="Логин" value={login}
                                    onChange={(event) => setLogin(event.target.value)}/>
                         </div>
                         <div className="mb-3">
-                            <label htmlFor="password-input" className="form-label">Password</label>
+                            <label htmlFor="password-input" className="form-label">Пароль</label>
                             <input type="password" className="form-control" name="password" id="password-input"
-                                   placeholder="password" value={password}
+                                   placeholder="Пароль" value={password}
                                    onChange={(event) => setPassword(event.target.value)}/>
                         </div>
                     </div>
-                    <input className="btn btn-success" type="submit" value="Log In"/>
+                    <input className="btn btn-success" type="submit" value="Войти"/>
                 </div>
             </form>
         </Modal>

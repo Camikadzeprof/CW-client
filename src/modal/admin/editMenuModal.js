@@ -43,6 +43,7 @@ const EditMenuModal = ({closeCallback, showEditMenuModal, id}) => {
             .then(({message}) => {
                 alert(message);
                 closeCallback();
+                window.location.reload();
             })
     }
     return (
@@ -53,18 +54,18 @@ const EditMenuModal = ({closeCallback, showEditMenuModal, id}) => {
                 keyboard={false}
             >
                 <Modal.Header>
-                    <Modal.Title>Edit Menu</Modal.Title>
+                    <Modal.Title>Редактировать блюдо</Modal.Title>
                 </Modal.Header>
                 <form onSubmit={editMenuSubmit}>
                     <Modal.Body>
                         <div className="mb3">
-                            <label htmlFor="name-input" className="form-label">Food Name</label>
+                            <label htmlFor="name-input" className="form-label">Название блюда</label>
                             <input type="text" className="form-control" name="name" id="name-input"
-                                   placeholder="Name" value={nameValue}
+                                   placeholder="Название" value={nameValue}
                                    onChange={(event) => setNameValue(event.target.value)}/>
                         </div>
                         <div className="mb3">
-                            <label htmlFor="img-input" className="form-label">Image</label>
+                            <label htmlFor="img-input" className="form-label">Изображение</label>
                             <input type="text" className="form-control" id="img-input"
                                    aria-describedby="imgHelp" value={imgValue}
                                    onChange={e => setImgValue(e.target.value)}/>
@@ -72,22 +73,22 @@ const EditMenuModal = ({closeCallback, showEditMenuModal, id}) => {
                             </div>
                         </div>
                         <div className="mb-3">
-                            <label htmlFor="description-input" className="form-label">Description</label>
+                            <label htmlFor="description-input" className="form-label">Описание</label>
                             <input type="text" className="form-control" id="description-input"
-                                   placeholder="Description" value={descriptionValue}
+                                   placeholder="Описание" value={descriptionValue}
                                    onChange={e => setDescriptionValue(e.target.value)}/>
                         </div>
                         <div className="mb-3">
-                            <label htmlFor="price-input" className="form-label">Price</label>
+                            <label htmlFor="price-input" className="form-label">Цена</label>
                             <input type="text" className="form-control" id="price-input"
-                                   placeholder="Price" value={priceValue}
-                                   onChange={e => setPriceValue(e.target.value)}/>
+                                   placeholder="Цена" value={priceValue}
+                                   onChange={e => setPriceValue(e.target.value)}/> BYN
                         </div>
                     </Modal.Body>
                     <Modal.Footer>
-                        <input className="btn btn-success" type="submit" value="Edit Menu"/>
+                        <input className="btn btn-success" type="submit" value="Редактировать"/>
                         <Button variant="secondary" onClick={closeCallback}>
-                            Close
+                            Закрыть
                         </Button>
                     </Modal.Footer>
                 </form>

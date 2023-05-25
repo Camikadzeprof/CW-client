@@ -27,6 +27,7 @@ const EditUserModal = ({closeCallback}) => {
             })
         }).then(() => {
             closeCallback();
+            window.location.reload();
             redux.getUserById(emailValue, phoneValue);
         })
             .catch(e => {
@@ -56,7 +57,7 @@ const EditUserModal = ({closeCallback}) => {
 
 
                         </div>
-                        <input className="btn btn-success" type="submit" value="Edit"/>
+                        <input className="btn btn-success" type="submit" value="Редактировать"/>
                     </form>
                 </div>
             </div>

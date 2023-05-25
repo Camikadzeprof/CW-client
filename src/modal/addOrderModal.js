@@ -111,7 +111,7 @@ const AddOrderModal = ({closeCallback, cartId, showAddOrderModal}) => {
                 keyboard={false}
             >
                 <Modal.Header>
-                    <Modal.Title>Сделать заказ</Modal.Title>
+                    <Modal.Title>Заказать</Modal.Title>
                 </Modal.Header>
                 <form onSubmit={addOrderSubmit}>
                     <Modal.Body>

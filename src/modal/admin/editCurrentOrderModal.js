@@ -80,7 +80,6 @@ const EditCurrentOrderModal = ({closeCallback, showEditOrderModal, id}) => {
                             <select className="form-control" id="status-input"
                                     placeholder="Статус" value={statusValue}
                                     onChange={e => setStatusValue(e.target.value)}>
-                                <option>Ожидание оплаты</option>
                                 <option>Принят</option>
                                 <option>Готовится</option>
                                 <option>Готов к доставке</option>

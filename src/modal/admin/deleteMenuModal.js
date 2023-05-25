@@ -12,6 +12,7 @@ const DeleteMenuModal = ({closeCallback, id, showDeleteMenuModal}) => {
             .then(({message}) => {
                 alert(message);
                 closeCallback();
+                window.location.reload();
             })
             .catch(e => {
                 alert(e.message);
@@ -25,16 +26,16 @@ const DeleteMenuModal = ({closeCallback, id, showDeleteMenuModal}) => {
                 keyboard={false}
             >
                 <Modal.Header>
-                    <Modal.Title>Delete food</Modal.Title>
+                    <Modal.Title>Удаление блюда</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    Do you really want to delete food?
+                    Вы действительно хотите удалить данное блюдо из меню?
                 </Modal.Body>
                 <Modal.Footer>
                     <Button variant="secondary" onClick={closeCallback}>
-                        Close
+                        Закрыть
                     </Button>
-                    <Button variant="primary" onClick={() => deleteMenuClick(id)}>Yeap</Button>
+                    <Button variant="primary" onClick={() => deleteMenuClick(id)}>Удалить</Button>
                 </Modal.Footer>
             </Modal>
         </>

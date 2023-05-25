@@ -34,19 +34,19 @@ const AddTypeModal = ({closeCallback, showAddTypeModal}) => {
                 keyboard={false}
             >
                 <Modal.Header>
-                    <Modal.Title>Add Food Type</Modal.Title>
+                    <Modal.Title>Добавить тип блюд</Modal.Title>
                 </Modal.Header>
                 <form onSubmit={addTypeSubmit}>
                     <Modal.Body>
-                        <label htmlFor="type-input" className="form-label">Type Name</label>
+                        <label htmlFor="type-input" className="form-label">Название типа</label>
                         <input type="text" className="form-control" name="type" id="type-input"
-                               placeholder="Name" value={nameValue}
+                               placeholder="Название" value={nameValue}
                                onChange={(event) => setNameValue(event.target.value)}/>
                     </Modal.Body>
                     <Modal.Footer>
-                        <input className="btn btn-success" type="submit" value="Add Type"/>
+                        <input className="btn btn-success" type="submit" value="Добавить"/>
                         <Button variant="secondary" onClick={closeCallback}>
-                            Close
+                            Закрыть
                         </Button>
                     </Modal.Footer>
                 </form>

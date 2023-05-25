@@ -59,14 +59,14 @@ const EditUserModal = ({closeCallback, userId}) => {
                                            value={emailValue} onChange={e => setEmailValue(e.target.value)}/>
                                 </div>
                                 <div className="mb-3">
-                                    <label htmlFor="phone-input" className="form-label">Phone</label>
+                                    <label htmlFor="phone-input" className="form-label">Телефон</label>
                                     <input type="phone" className="form-control" id="phone-input"
                                            value={phoneValue} onChange={e => setPhoneValue(e.target.value)}/>
                                 </div>
                             </div>
 
                         </div>
-                        <input className="btn btn-success" type="submit" value="Edit"/>
+                        <input className="btn btn-success" type="submit" value="Редактировать"/>
                     </form>
                 </div>
             </div>

@@ -12,6 +12,7 @@ const DeleteTypeModal = ({closeCallback, typeName, showDeleteTypeModal}) => {
             .then(({message}) => {
                 alert(message);
                 closeCallback();
+                window.location.reload();
             })
             .catch(e => {
                 alert(e.message);
@@ -25,16 +26,16 @@ const DeleteTypeModal = ({closeCallback, typeName, showDeleteTypeModal}) => {
                 keyboard={false}
             >
                 <Modal.Header>
-                    <Modal.Title>Delete type</Modal.Title>
+                    <Modal.Title>Удалить тип</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    Do you really want to delete type?
+                    Вы действительно хотите удалить данный тип?
                 </Modal.Body>
                 <Modal.Footer>
                     <Button variant="secondary" onClick={closeCallback}>
-                        Close
+                        Закрыть
                     </Button>
-                    <Button variant="primary" onClick={() => deleteTypeClick(typeName)}>Yeap</Button>
+                    <Button variant="primary" onClick={() => deleteTypeClick(typeName)}>Удалить</Button>
                 </Modal.Footer>
             </Modal>
         </>

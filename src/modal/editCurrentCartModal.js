@@ -47,14 +47,14 @@ const EditCurrentCartModal = ({closeCallback, showEditCartModal, id}) => {
                 keyboard={false}
             >
                 <Modal.Header>
-                    <Modal.Title>Изменение элемента корзины</Modal.Title>
+                    <Modal.Title>Изменение корзины</Modal.Title>
                 </Modal.Header>
                 <form onSubmit={editCartSubmit}>
                     <Modal.Body>
                         <div className="mb-3">
-                            <label htmlFor="amount-input" className="form-label">Количество блюд</label>
+                            <label htmlFor="amount-input" className="form-label">Количество порций</label>
                             <input type="number" className="form-control" id="amount-input"
-                                   placeholder="Amount" value={amountValue}
+                                   placeholder="Кол-во" value={amountValue}
                                    onChange={e => setAmountValue(e.target.value)}/>
                         </div>
                     </Modal.Body>

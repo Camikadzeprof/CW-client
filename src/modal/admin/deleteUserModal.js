@@ -26,16 +26,16 @@ const DeleteUserModal = ({closeCallback, showDeleteUserModal, userId}) => {
                 keyboard={false}
             >
                 <Modal.Header>
-                    <Modal.Title>Delete user</Modal.Title>
+                    <Modal.Title>Удаление пользователя</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    Do you really want to delete user?
+                    Вы действительно хотите удалить данного пользователя?
                 </Modal.Body>
                 <Modal.Footer>
                     <Button variant="secondary" onClick={closeCallback}>
-                        Close
+                        Закрыть
                     </Button>
-                    <Button variant="primary" onClick={() => deleteUserClick(userId)}>Yeap</Button>
+                    <Button variant="primary" onClick={() => deleteUserClick(userId)}>Удалить</Button>
                 </Modal.Footer>
             </Modal>
         </>

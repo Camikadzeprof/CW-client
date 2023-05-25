@@ -34,6 +34,7 @@ const EditTypeModal = ({closeCallback, showEditTypeModal, typeName}) => {
             .then(({message}) => {
                 alert(message);
                 closeCallback();
+                window.location.reload();
             })
     }
     return (
@@ -44,20 +45,18 @@ const EditTypeModal = ({closeCallback, showEditTypeModal, typeName}) => {
                 keyboard={false}
             >
                 <Modal.Header>
-                    <Modal.Title>Edit Type</Modal.Title>
+                    <Modal.Title>Редактировать тип</Modal.Title>
                 </Modal.Header>
                 <form onSubmit={editTypeSubmit}>
                     <Modal.Body>
-                        <label htmlFor="type-input" className="form-label">Topic Name</label>
+                        <label htmlFor="type-input" className="form-label">Название типа</label>
                         <input type="text" className="form-control" name="type" id="type-input"
-                               placeholder="Name" value={nameValue}
+                               placeholder="Название" value={nameValue}
                                onChange={(event) => setNameValue(event.target.value)}/>
                     </Modal.Body>
                     <Modal.Footer>
-                        <input className="btn btn-success" type="submit" value="Edit Type"/>
-                        <Button variant="secondary" onClick={closeCallback}>
-                            Close
-                        </Button>
+                        <input className="btn btn-success" type="submit" value="Редактировать"/>
+                        <input className="btn btn-danger" type="button" onClick={closeCallback} value="Закрыть"/>
                     </Modal.Footer>
                 </form>
             </Modal>

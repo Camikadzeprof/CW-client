@@ -12,15 +12,15 @@ const SignUpModal = ({closeCallback}) => {
     const checkFields = async (event) => {
         event.preventDefault();
         if (password !== confirmPassword) {
-            alert('Passwords are not equal');
+            alert('Пароли не совпадают');
             return;
         }
         if (password.length < 6) {
-            alert('Password must be at least 6 characters');
+            alert('Длина пароля должна быть как минимум 6 символов');
             return;
         }
         if ((!phone.startsWith('+')) || (phone.length != 13)) {
-            alert('Phone must start with "+" and must be 13 characters long');
+            alert('Телефон должен начинаться с "+" и содержать 13 символов');
             return;
         }
         await fetch('/auth/signup', {
@@ -39,6 +39,7 @@ const SignUpModal = ({closeCallback}) => {
             .then(({message}) => {
                 alert(message);
                 closeCallback();
+                window.location.reload();
             })
             .catch(e => {
                 alert(e.message);
@@ -54,47 +55,44 @@ const SignUpModal = ({closeCallback}) => {
                         <div className="col">
                             <div className="mb-3">
                                 <div className="mb-3">
-                                    <label htmlFor="email-input" className="form-label">Email address</label>
+                                    <label htmlFor="email-input" className="form-label">Email адрес</label>
                                     <input type="email" className="form-control" id="email-input"
                                            aria-describedby="emailHelp"
                                            value={email} onChange={e => setEmail(e.target.value)}/>
-                                    <div id="emailHelp" className="form-text">We'll never share your email with anyone
-                                        else.
+                                    <div id="emailHelp" className="form-text">Мы не будем разглашать ваш e-mail адрес кому-либо.
                                     </div>
                                 </div>
                                 <div className="mb-3">
-                                    <label htmlFor="phone-input" className="form-label">Phone number</label>
+                                    <label htmlFor="phone-input" className="form-label">Номер телефона</label>
                                     <input type="text" className="form-control" id="phone-input"
                                            aria-describedby="phoneHelp"
                                            value={phone} onChange={e => setPhone(e.target.value)}/>
-                                    <div id="phoneHelp" className="form-text">We'll never share your phone with anyone
-                                        else.
+                                    <div id="phoneHelp" className="form-text">Мы не будем разглашать ваш номер телефона кому-либо.
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <div className="col order-1">
                             <div className="mb-3">
-                                <label htmlFor="login-input" className="form-label">Login</label>
-                                <input type="text" className="form-control" id="login-input"
+                                <label htmlFor="login-input" className="form-label">Логин</label>
+                                <input type="text" className="form-control" id="login-input" placeholder="Логин"
                                        value={login} onChange={e => setLogin(e.target.value)}/>
                                 <div className="mb-3">
-                                    <label htmlFor="password-input" className="form-label">Password</label>
-                                    <input type="password" className="form-control" id="password-input"
+                                    <label htmlFor="password-input" className="form-label">Пароль</label>
+                                    <input type="password" className="form-control" id="password-input" placeholder="Пароль"
                                            value={password} onChange={e => setPassword(e.target.value)}
                                     />
                                 </div>
                                 <div className="mb-3">
-                                    <label htmlFor="confirmPassword-input" className="form-label">Confirm
-                                        Password</label>
-                                    <input type="password" className="form-control" id="confirmPassword-input"
+                                    <label htmlFor="confirmPassword-input" className="form-label">Подтвердите пароль</label>
+                                    <input type="password" className="form-control" id="confirmPassword-input" placeholder="Пароль еще раз"
                                            value={confirmPassword} onChange={e => setConfirmPassword(e.target.value)}
                                     />
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <input className="btn btn-success" type="submit" value="Sign Up"/>
+                    <input className="btn btn-success" type="submit" value="Зарегистрироваться"/>
                 </div>
             </form>
         </Modal>

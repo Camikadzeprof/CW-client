@@ -26,16 +26,16 @@ const DeleteCurrentCartModal = ({closeCallback, id, showDeleteCartModal}) => {
                 keyboard={false}
             >
                 <Modal.Header>
-                    <Modal.Title>Delete cart item</Modal.Title>
+                    <Modal.Title>Убрать из корзины</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    Do you really want to delete cart item?
+                    Вы действительно хотите убрать это блюдо из корзины?
                 </Modal.Body>
                 <Modal.Footer>
                     <Button variant="secondary" onClick={closeCallback}>
-                        Close
+                        Закрыть
                     </Button>
-                    <Button variant="primary" onClick={() => deleteCartClick(id)}>Yeap</Button>
+                    <Button variant="primary" onClick={() => deleteCartClick(id)}>Убрать</Button>
                 </Modal.Footer>
             </Modal>
         </>

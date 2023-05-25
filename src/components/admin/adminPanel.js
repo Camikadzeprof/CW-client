@@ -11,8 +11,6 @@ import EditTypeModal from "../../modal/admin/editTypeModal";
 import DeleteTypeModal from "../../modal/admin/deleteTypeModal";
 import EditMenuModal from "../../modal/admin/editMenuModal";
 import DeleteMenuModal from "../../modal/admin/deleteMenuModal";
-import EditOrderModal from "../../modal/admin/editOrderModal";
-import DeleteOrderModal from "../../modal/admin/deleteOrderModal";
 
 const AdminPanel = (props) => {
     const redux = useActions();
@@ -25,8 +23,6 @@ const AdminPanel = (props) => {
     const [showEditMenuModal, toggleEditMenuModal] = useState(false);
     const [showDeleteTypeModal, toggleDeleteTypeModal] = useState(false);
     const [showDeleteMenuModal, toggleDeleteMenuModal] = useState(false);
-    const [showEditOrderModal, toggleEditOrderModal] = useState(false);
-    const [showDeleteOrderModal, toggleDeleteOrderModal] = useState(false);
     const [currentUserIdValue, setCurrentUserIdValue] = useState('');
     const [currentTypeNameValue, setCurrentTypeNameValue] = useState('');
     const [currentMenuIdValue, setCurrentMenuIdValue] = useState('');
@@ -119,12 +115,6 @@ const AdminPanel = (props) => {
             {showDeleteMenuModal ?
                 <DeleteMenuModal closeCallback={() => toggleDeleteMenuModal(false)} id={currentMenuIdValue}
                                  showDeleteMenuModal={showDeleteMenuModal}/> : null}
-            {showEditOrderModal ? <EditOrderModal closeCallback={() => toggleEditOrderModal(false)}
-                                                showEditOrderModal={showEditOrderModal}
-                                                id={currentOrderIdValue}/> : null}
-            {showDeleteOrderModal ?
-                <DeleteOrderModal closeCallback={() => toggleDeleteOrderModal(false)} id={currentOrderIdValue}
-                                 showDeleteOrderModal={showDeleteOrderModal}/> : null}
             <div className="main_content">
                 <div className="info">
                     <div>
@@ -169,6 +159,12 @@ const AdminPanel = (props) => {
                                         setCurrentTypeNameValue(type.name);
                                         toggleEditTypeModal(true);
                                     }}>Редактировать
+                                    </button>
+                                    <button className="btn btn-danger" type="button" onClick={() => {
+                                        setCurrentTypeNameValue(type.name);
+                                        toggleDeleteTypeModal(true);
+                                    }}>
+                                        Удалить
                                     </button>
 
                                 </div>

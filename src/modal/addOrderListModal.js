@@ -118,21 +118,21 @@ const AddOrderListModal = ({closeCallback, showAddOrderListModal}) => {
                 keyboard={false}
             >
                 <Modal.Header>
-                    <Modal.Title>Make Order</Modal.Title>
+                    <Modal.Title>Заказать</Modal.Title>
                 </Modal.Header>
                 <form onSubmit={addOrderListSubmit}>
                     <Modal.Body>
                         <div className="mb-3">
-                            <label htmlFor="address-input" className="form-label">Address</label>
+                            <label htmlFor="address-input" className="form-label">Адрес</label>
                             <input type="text" className="form-control" id="address-input"
-                                   placeholder="Address" value={addressValue}
+                                   placeholder="Адрес" value={addressValue}
                                    onChange={e => setAddressValue(e.target.value)}/>
                         </div>
                     </Modal.Body>
                     <Modal.Footer>
-                        <input className="btn btn-success" type="submit" value="Make order"/>
+                        <input className="btn btn-success" type="submit" value="Заказать"/>
                         <Button variant="secondary" onClick={closeCallback}>
-                            Close
+                            Закрыть
                         </Button>
                     </Modal.Footer>
                 </form>
