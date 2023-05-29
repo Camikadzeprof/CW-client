@@ -19,10 +19,6 @@ const SignUpModal = ({closeCallback}) => {
             alert('Длина пароля должна быть как минимум 6 символов');
             return;
         }
-        if ((!phone.startsWith('+')) || (phone.length != 13)) {
-            alert('Телефон должен начинаться с "+" и содержать 13 символов');
-            return;
-        }
         await fetch('/auth/signup', {
             method: 'POST',
             headers: {
@@ -65,7 +61,7 @@ const SignUpModal = ({closeCallback}) => {
                                 <div className="mb-3">
                                     <label htmlFor="phone-input" className="form-label">Номер телефона</label>
                                     <input type="text" className="form-control" id="phone-input"
-                                           aria-describedby="phoneHelp"
+                                           aria-describedby="phoneHelp" pattern="[0-9]{12}"
                                            value={phone} onChange={e => setPhone(e.target.value)}/>
                                     <div id="phoneHelp" className="form-text">Мы не будем разглашать ваш номер телефона кому-либо.
                                     </div>

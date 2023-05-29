@@ -7,11 +7,11 @@ export const getOrderItems = (obj) => (dispatch) => {
         dispatch({type: ALL_ORDERITEMS, payload: {orderItems: null}});
     }
 }
-export const getCurrentOrderItem = (_id, food, amount, quantity, order) => (dispatch) => {
+export const getCurrentOrderItem = (_id, food, amount, order) => (dispatch) => {
     try {
-        dispatch({type: CURRENT_ORDERITEM, payload: {_id, food, amount, quantity, order}});
+        dispatch({type: CURRENT_ORDERITEM, payload: {_id, food, amount, order}});
     } catch (e) {
-        dispatch({type: CURRENT_ORDERITEM, payload: {_id: null, food: null, amount: null, quantity: null, order: null}});
+        dispatch({type: CURRENT_ORDERITEM, payload: {_id: null, food: null, amount: null, order: null}});
     }
 }
 

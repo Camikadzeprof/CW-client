@@ -1,9 +1,7 @@
 import React, {useState, useEffect} from "react";
 import {useStripe, PaymentRequestButtonElement} from "@stripe/react-stripe-js";
-import axios from "axios";
 import CheckoutForm from "./checkoutForm";
 import {useParams} from "react-router-dom";
-import {useSelector} from "react-redux";
 
 const Payment = (props) => {
     const stripe = useStripe();
@@ -53,24 +51,6 @@ const Payment = (props) => {
                     event.complete('fail');
                     console.log(response ? response.data : message);
                 })
-            /*try {
-                const {data} = await axios.post('/api/payment', JSON.stringify({
-                    id: id,
-                    amount: amount,
-                    orderId: orderId
-                }),
-                    {
-                        headers: {
-                            'Authorization': `Bearer ${localStorage.getItem('token')}`
-                        }
-                    }    );
-                event.complete('success');
-                console.log(data);
-            }
-            catch ({message, response}) {
-                event.complete('fail');
-                console.log(response ? response.data : message);
-            }*/
         })
     }
 

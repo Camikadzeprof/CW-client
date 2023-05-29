@@ -142,7 +142,11 @@ const AdminPanel = (props) => {
                                         toggleShowUserModal(true);
                                     }}>Показать
                                     </button>
-
+                                    <button type="button" className="btn btn-danger" onClick={() => {
+                                        setCurrentUserIdValue(user._id);
+                                        toggleDeleteUserModal(true);
+                                    }}>Удалить
+                                    </button>
                                 </div>
                             </li>
                         ))}
@@ -185,13 +189,18 @@ const AdminPanel = (props) => {
                                     <span id="span_description">{menu.description}</span>
                                 </div>
                                 <div id="list-span">
-                                    <span id="span_price">{menu.price}</span>
+                                    <span id="span_price">{menu.price} BYN</span>
                                 </div>
                                 <div className="btn-group" role="group" aria-label="Basic outlined example">
                                     <button type="button" className="btn btn-outline-primary" onClick={() => {
                                         setCurrentMenuIdValue(menu._id);
                                         toggleEditMenuModal(true);
                                     }}>Редактировать
+                                    </button>
+                                    <button type="button" className="btn btn-danger" onClick={() => {
+                                        setCurrentMenuIdValue(menu._id);
+                                        toggleDeleteMenuModal(true);
+                                    }}>Удалить
                                     </button>
                                 </div>
                             </li>

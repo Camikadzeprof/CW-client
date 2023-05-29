@@ -79,7 +79,7 @@ const CurrentOrder = () => {
                                                        id={currentOrderIdValue}/> : null}
             {showDeleteOrderModal ?
                 <DeleteCurrentOrderModal closeCallback={() => toggleDeleteOrderModal(false)} id={currentOrderIdValue}
-                                        showDeleteCartModal={showDeleteOrderModal}/> : null}
+                                        showDeleteOrderModal={showDeleteOrderModal}/> : null}
             <div className="main_content">
                 <div className="info">
                     <div className="card">
@@ -98,21 +98,20 @@ const CurrentOrder = () => {
                             <div id="list-span">
                                 <span id="span_food">{orderItem.food.name}</span>
                                 <span id="span_amount">{orderItem.amount}</span>
-                                <span id="span_quantity">{orderItem.quantity}</span>
                             </div>
                         </li>
                     ))}
                     {role === "admin" && status !== "Выполнен" ? <div className="btn-group" role="group" aria-label="Basic outlined example">
-                        <button type="button" className="btn btn-success" onClick={() => {
+                        {paid ? null : <button type="button" className="btn btn-success" onClick={() => {
                             setCurrentOrderIdValue(_id);
                             toggleEditOrderModal(true);
                         }}>Редактировать
-                        </button>
-                        <button type="button" style={{marginLeft: "5px"}} className="btn btn-danger" onClick={() => {
+                        </button>}
+                        {paid ? null : <button type="button" style={{marginLeft: "5px"}} className="btn btn-danger" onClick={() => {
                             setCurrentOrderIdValue(_id);
                             toggleDeleteOrderModal(true);
                         }}>Удалить
-                        </button>
+                        </button>}
                     </div> : null}
                     {role === "courier" && status === "Готов к доставке" ? <div className="btn-group" role="group" aria-label="Basic outlined example">
                         <button type="button" className="btn btn-success" onClick={() => acceptForDeliveryClick()}>

@@ -25,9 +25,10 @@ const AddMenuModal = ({closeCallback, showAddMenuModal}) => {
         })
             .then(data => data.json())
             .then(({message}) => {
-                alert(message);
-                closeCallback();
-                window.location.reload();
+                if (message === 'Введите существующий тип')
+                    alert(message);
+                else
+                    window.location.reload();
             })
             .catch(e => {
                 alert(e.message)

@@ -57,7 +57,7 @@ const Cart = (props) => {
                                 <div id="list-span">
                                     <span id="span_food">{cart.food.name}</span>
                                     <span id="span_amount">{cart.amount}</span>
-                                    <span id="span_quantity">{cart.quantity}</span>
+                                    <span id="span_quantity">{cart.quantity} BYN</span>
                                 </div>
                                 <div className="btn-group" role="group" aria-label="Basic outlined example">
                                     <NavLink to={`/cart/${cart._id}`} exact

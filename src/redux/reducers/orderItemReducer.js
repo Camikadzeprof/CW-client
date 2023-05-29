@@ -4,7 +4,6 @@ const initialState = {
     _id: '',
     food: '',
     amount: '',
-    quantity: '',
     order: '',
     orderItems: []
 }

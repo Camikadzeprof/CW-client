@@ -2,7 +2,6 @@ import {Button, Modal} from "react-bootstrap";
 import {useSelector} from "react-redux";
 
 const DeleteCurrentOrderModal = ({closeCallback, id, showDeleteOrderModal}) => {
-    const {_id, role} = useSelector(state => state.user);
     const deleteOrderClick = async (id) => {
         await fetch(`/order/${id}`, {
             method: 'DELETE',
@@ -14,7 +13,7 @@ const DeleteCurrentOrderModal = ({closeCallback, id, showDeleteOrderModal}) => {
             .then(({message}) => {
                 alert(message);
                 closeCallback();
-                window.location.assign(`/orders/user/${_id}`);
+                window.location.assign(`/orders`);
             })
             .catch(e => {
                 alert(e.message);

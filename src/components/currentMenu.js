@@ -55,7 +55,7 @@ const CurrentMenu = () => {
                             <h5 className="card-title">{name}</h5>
                             <img src={img} width={200} height={200}/>
                             <p className="card-text">{description}</p>
-                            <p className="card-text">{price}</p>
+                            <p className="card-text">{price} BYN</p>
 
                         </div>
                     </div>

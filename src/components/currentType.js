@@ -46,7 +46,7 @@ const CurrentType = () => {
                                         <h5 className="card-title">{name}</h5>
                                         <p><img src={img} width={200} height={200}/></p>
                                         <p className="card-text">{description}</p>
-                                        <p className="card-text">{price}</p>
+                                        <p className="card-text">{price} BYN</p>
                                         <div className="btn-group" role="group" aria-label="Basic outlined example">
                                             <NavLink to={`${typeName}/${_id}`} exact
                                                      className="btn btn-outline-primary">Показать</NavLink>
