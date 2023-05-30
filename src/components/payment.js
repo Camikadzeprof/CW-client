@@ -56,11 +56,13 @@ const Payment = (props) => {
 
     return (
         <>
+            <div style={{marginTop: "450px"}}>
             {paymentRequest ? (
                 <PaymentRequestButtonElement options={{ paymentRequest: paymentRequest}}/>
             ) : (
                 <CheckoutForm amount={amount} orderId={orderId}/>
             )}
+            </div>
         </>
     )
 }

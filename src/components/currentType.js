@@ -5,23 +5,18 @@ import {useSelector} from "react-redux";
 
 const CurrentType = () => {
     const {typeName} = useParams();
+    const {role} = useSelector(state => state.user);
     const redux = useActions();
     useEffect(() => {
         (async () => {
                 await fetch(`/type/${typeName}`, {
-                    method: 'GET',
-                    headers: {
-                        'Authorization': `Bearer ${localStorage.getItem('token')}`
-                    }
+                    method: 'GET'
                 })
                     .then(data => data.json())
                     .then(({_id, name}) => {
                         redux.getCurrentType(_id, name);
                         fetch(`/menu/type/${name}`, {
-                            method: 'GET',
-                            headers: {
-                                'Authorization': `Bearer ${localStorage.getItem('token')}`
-                            }
+                            method: 'GET'
                         }).then(data => data.json())
                             .then((menus) => {
                                 redux.getMenu(menus);
@@ -37,7 +32,7 @@ const CurrentType = () => {
         <>
             <div className="main_content">
                 <div className="info">
-                    <h4>Тип: {typeName}</h4>
+                    <h4>{typeName}</h4>
                     {!!menus ? (
                         <>
                             {menus.map(({_id, name, type, img, description, price}, index) => (
@@ -47,10 +42,11 @@ const CurrentType = () => {
                                         <p><img src={img} width={200} height={200}/></p>
                                         <p className="card-text">{description}</p>
                                         <p className="card-text">{price} BYN</p>
+                                        {!role || role !== "user" ? null :
                                         <div className="btn-group" role="group" aria-label="Basic outlined example">
                                             <NavLink to={`${typeName}/${_id}`} exact
                                                      className="btn btn-outline-primary">Показать</NavLink>
-                                        </div>
+                                        </div>}
                                     </div>
                                 </div>
                             ))}

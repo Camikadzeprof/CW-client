@@ -105,6 +105,7 @@ const AddOrderListModal = ({closeCallback, showAddOrderListModal}) => {
                     courier: order.courier
                 })
             })
+            window.location.reload();
         }
         else {
             window.location.assign(`/payment/${order.amount}/${order._id}`);

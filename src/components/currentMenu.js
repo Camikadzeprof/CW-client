@@ -10,25 +10,30 @@ const CurrentMenu = () => {
     const [amountValue, setAmountValue] = useState('');
     const sendCartSubmit = async (e) => {
         e.preventDefault();
-        await fetch('/cart', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': `Bearer ${localStorage.getItem('token')}`
-            },
-            body: JSON.stringify({
-                food: menuId,
-                amount: amountValue,
-                user: id
-            })
-        }).then(data => data.json())
-            .then(({message}) => {
-                alert(message);
-                setAmountValue(0);
-            })
-            .catch(e => {
-                alert(e.message)
-            })
+        if (amountValue > 0) {
+            await fetch('/cart', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${localStorage.getItem('token')}`
+                },
+                body: JSON.stringify({
+                    food: menuId,
+                    amount: amountValue,
+                    user: id
+                })
+            }).then(data => data.json())
+                .then(({message}) => {
+                    alert(message);
+                    setAmountValue(0);
+                })
+                .catch(e => {
+                    alert(e.message)
+                })
+        }
+        else {
+            alert('Количество блюд должно быть больше нуля');
+        }
     }
     useEffect(() => {
         (async () => {
@@ -41,6 +46,7 @@ const CurrentMenu = () => {
                 .then(data => data.json())
                 .then(({_id, name, type, img, description, price}) => {
                     redux.getCurrentMenu(_id, name, type, img, description, price);
+                    setAmountValue(1);
                 })
         })()
     }, [])
@@ -65,7 +71,7 @@ const CurrentMenu = () => {
                             <input type="number" className="form-control" id="amountInput" value={amountValue}
                                    onChange={e => setAmountValue(e.target.value)}/>
                         </div>
-                        <input type="submit" className='btn btn-primary' value="Send"/>
+                        <input type="submit" className='btn btn-success' value="Добавить в корзину"/>
                     </form>
                 </div>
             </div>

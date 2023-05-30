@@ -40,7 +40,7 @@ const Sidebar = (props) => {
                 <h2>Доставка еды</h2>
                 <ul>
                     <li>
-                        <span>{username ? username : 'Unauthorized user'}</span>
+                        <span>{username ? username : null}</span>
                         {username ? <div className="logout-button">
                             <button type="button" onClick={logout}>Выйти</button>
                         </div> : <div className="auth-buttons">
@@ -62,7 +62,7 @@ const Sidebar = (props) => {
                         className="fas fa-user"/>Профиль</NavLink></li>
                     <li><NavLink to="/type" activeClassName="active"><i className="fas fa-book"/>Меню</NavLink>
                     </li>
-                    {(role !== 'courier' && role !== 'admin') ?
+                    {(role !== 'courier' && role !== 'admin' && role !== 'operator') ?
                     <li><NavLink to="/cart" activeClassName="active"><i className="fas fa-shopping-cart"/>Корзина</NavLink>
                     </li> : null}
                     <li><NavLink to="/order" activeClassName="active"><i className="fas fa-badge-dollar" />Заказы</NavLink>

@@ -7,7 +7,7 @@ const EditCurrentOrderModal = ({closeCallback, showEditOrderModal, id}) => {
     const [addressValue, setAddressValue] = useState('');
     const [statusValue, setStatusValue] = useState('');
     const [courierValue, setCourierValue] = useState('');
-    const {userId} = useSelector(state => state.user);
+    const {role} = useSelector(state => state.user);
     useEffect(() => {
         (async () => {
             await fetch(`/order/${id}`, {
@@ -25,7 +25,7 @@ const EditCurrentOrderModal = ({closeCallback, showEditOrderModal, id}) => {
                 })
         })()
     }, [])
-    const editCartSubmit = async (e) => {
+    const editOrderSubmit = async (e) => {
         e.preventDefault();
         if (paidValue && statusValue == "Ожидание оплаты") setStatusValue("Принят");
         await fetch(`/order/${id}`, {
@@ -59,31 +59,24 @@ const EditCurrentOrderModal = ({closeCallback, showEditOrderModal, id}) => {
                 <Modal.Header>
                     <Modal.Title>Изменение заказа</Modal.Title>
                 </Modal.Header>
-                <form onSubmit={editCartSubmit}>
+                <form onSubmit={editOrderSubmit}>
                     <Modal.Body>
-                        <div className="mb-3">
-                            <label htmlFor="paid-input" className="form-label">Оплачен</label>
-                            {paidValue ? <input type="checkbox"  id="paid-input"
-                                   checked={true}
-                                   onChange={e => setPaidValue(false)}/> : <input type="checkbox" id="paid-input"
-                                                                                  checked={false}
-                                                                                  onChange={e => setPaidValue(true)}/>}
-                        </div>
+                        {paidValue ? null :
                         <div className="mb-3">
                             <label htmlFor="address-input" className="form-label">Адрес доставки</label>
                             <input type="text" className="form-control" id="address-input"
                                    placeholder="Адрес доставки" value={addressValue}
                                    onChange={e => setAddressValue(e.target.value)}/>
-                        </div>
+                        </div>}
                         <div className="mb-3">
                             <label htmlFor="status-input" className="form-label">Статус</label>
                             <select className="form-control" id="status-input"
                                     placeholder="Статус" value={statusValue}
                                     onChange={e => setStatusValue(e.target.value)}>
-                                <option>Принят</option>
-                                <option>Готовится</option>
+                                {role === "operator" && (statusValue === "Готовится" || statusValue === "Готов к доставке") ? null : <option>Принят</option>}
+                                {role === "operator" && statusValue === "Готов к доставке" ? null : <option>Готовится</option>}
                                 <option>Готов к доставке</option>
-                                <option>Выполнен</option>
+                                {role === "operator" ? null : <option>Выполнен</option>}
                             </select>
                         </div>
                     </Modal.Body>

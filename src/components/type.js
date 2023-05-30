@@ -5,21 +5,15 @@ import {NavLink} from "react-router-dom";
 
 const Type = (props) => {
     const redux = useActions();
-    const token = localStorage.getItem('token');
     useEffect(() => {
         (async () => {
-            if (token) {
-                await fetch('/type', {
-                    method: 'GET',
-                    headers: {
-                        'Authorization': `Bearer ${token}`
-                    }
+            await fetch('/type', {
+                method: 'GET'
+            })
+                .then(data => data.json())
+                .then(types => {
+                    redux.getTypes(types);
                 })
-                    .then(data => data.json())
-                    .then(types => {
-                        redux.getTypes(types);
-                    })
-            }
         })()
     }, [])
     const {types} = useSelector(state => state.type);

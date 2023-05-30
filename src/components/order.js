@@ -10,7 +10,7 @@ const Order = (props) => {
     const stat = 'Готов к доставке';
     useEffect(() => {
         (async () => {
-            if (role === 'admin') {
+            if (role === 'admin' || role === 'operator') {
                 if (token) {
                     await fetch(`/orders`, {
                         method: 'GET',
@@ -67,7 +67,7 @@ const Order = (props) => {
                                 <small id="span_id">{order._id}</small>
                             </div>
                             <div id="list-span">
-                                <small style={{marginLeft: "50px"}} id="span_amount">{order.amount.toFixed(2)}</small>
+                                <small style={{marginLeft: "50px"}} id="span_amount">{order.amount.toFixed(2)} BYN</small>
                             </div>
                             <div id="list-span">
                                 {order.paid ? (<small style={{marginLeft: "50px"}} id="span_paid" style={{color: "green"}}>Оплачен</small>)

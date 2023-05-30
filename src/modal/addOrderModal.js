@@ -118,7 +118,7 @@ const AddOrderModal = ({closeCallback, cartId, showAddOrderModal}) => {
                         <div className="mb-3">
                             <div className="card-body">
                                 <h5 className="card-title">{food.name}</h5>
-                                <p className="card-text">Цена за одно блюдо:{food.price}</p>
+                                <p className="card-text">Цена за одно блюдо: {food.price.toFixed(2)} BYN</p>
                             </div>
                             <label htmlFor="amountInput" className="form-label">Выберите количество</label>
                             <input type="number" className="form-control" id="amount-input"

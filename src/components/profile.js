@@ -73,9 +73,9 @@ const Profile = () => {
                                             <div className="d-flex flex-column align-items-center text-center">
                                                 <div className="mt-3">
                                                     <h4>{username}</h4>
-                                                    <p className="text-secondary mb-1">{role === 'user' ? 'Пользователь сервиса' : ((role === 'courier') ? 'Курьер' : 'Администратор')}</p>
+                                                    <p className="text-secondary mb-1">{role === 'user' ? 'Пользователь сервиса' : ((role === 'courier') ? 'Курьер' : ((role === 'operator') ? 'Оператор' : 'Администратор'))}</p>
                                                     <button className="btn btn-primary"
-                                                            onClick={() => toggleEditUserModal(true)}>Edit
+                                                            onClick={() => toggleEditUserModal(true)}>Редактировать
                                                     </button>
                                                 </div>
                                             </div>
@@ -112,7 +112,7 @@ const Profile = () => {
 
                                         </div>
                                     </div>
-                                    {role !== "admin" ? <div className="row gutters-sm">
+                                    {role !== "admin" && role !== "operator" ? <div className="row gutters-sm">
                                         <div>
                                             <div className="card h-100">
                                                 <div className="card-body">
@@ -141,7 +141,7 @@ const Profile = () => {
                                                                 <li className="list-group-item">
                                                                     <div id="list-span">
                                                                         <small>{_id}</small>
-                                                                        <small style={{marginLeft:"20px"}} id="span_amount">{amount.toFixed(2)}</small>
+                                                                        <small style={{marginLeft:"20px"}} id="span_amount">{amount.toFixed(2)} BYN</small>
                                                                         {paid ? (<small style={{marginLeft:"20px", color:"green"}} id="span-paid">Оплачен</small>) : (<small style={{marginLeft:"20px", color:"red"}} id="span-paid">Не оплачен</small>)}
                                                                         <small style={{marginLeft:"20px"}} id="span-status">{status}</small>
                                                                     </div>

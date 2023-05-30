@@ -142,11 +142,12 @@ const AdminPanel = (props) => {
                                         toggleShowUserModal(true);
                                     }}>Показать
                                     </button>
-                                    <button type="button" className="btn btn-danger" onClick={() => {
-                                        setCurrentUserIdValue(user._id);
-                                        toggleDeleteUserModal(true);
-                                    }}>Удалить
-                                    </button>
+                                    {user.role === 'admin' ? null :
+                                        <button type="button" className="btn btn-danger" onClick={() => {
+                                            setCurrentUserIdValue(user._id);
+                                            toggleDeleteUserModal(true);
+                                        }}>Удалить
+                                        </button>}
                                 </div>
                             </li>
                         ))}

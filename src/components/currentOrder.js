@@ -85,7 +85,7 @@ const CurrentOrder = () => {
                     <div className="card">
                         <div className="card-body">
                             <h5 className="card-title">{_id}</h5>
-                            <p className="card-text">{amount}</p>
+                            <p className="card-text">{Number(amount).toFixed(2)} BYN</p>
                             {paid ? <p style={{color:"green"}} className="card-text">Оплачен</p> : <p style={{color:"red"}} className="card-text">Не оплачен</p>}
                             <p className="card-text">{address}</p>
                             <p className="card-text">{status}</p>
@@ -102,15 +102,22 @@ const CurrentOrder = () => {
                         </li>
                     ))}
                     {role === "admin" && status !== "Выполнен" ? <div className="btn-group" role="group" aria-label="Basic outlined example">
-                        {paid ? null : <button type="button" className="btn btn-success" onClick={() => {
+                        <button type="button" className="btn btn-success" onClick={() => {
                             setCurrentOrderIdValue(_id);
                             toggleEditOrderModal(true);
                         }}>Редактировать
-                        </button>}
+                        </button>
                         {paid ? null : <button type="button" style={{marginLeft: "5px"}} className="btn btn-danger" onClick={() => {
                             setCurrentOrderIdValue(_id);
                             toggleDeleteOrderModal(true);
                         }}>Удалить
+                        </button>}
+                    </div> : null}
+                    {role === "operator" && status !== "Выполнен" ? <div className="btn-group" role="group" aria-label="Basic outlined example">
+                        {status === "Готов к доставке" || status === "Доставляется" ? null : <button type="button" className="btn btn-success" onClick={() => {
+                            setCurrentOrderIdValue(_id);
+                            toggleEditOrderModal(true);
+                        }}>Редактировать
                         </button>}
                     </div> : null}
                     {role === "courier" && status === "Готов к доставке" ? <div className="btn-group" role="group" aria-label="Basic outlined example">

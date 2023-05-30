@@ -10,7 +10,7 @@ class Main extends React.Component {
                             <div className="row gx-4 gx-lg-5 align-items-center">
                                 <h1 className="display-5 fw-bolder">Курсовой проект "Доставка еды"</h1>
                                 <div className="col-md-6"><img className="card-img-top mb-5 mb-md-0"
-                                                               src="https://www.allrecipes.com/thmb/0xH8n2D4cC97t7mcC7eT2SDZ0aE=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/6776_Pizza-Dough_ddmfs_2x1_1725-fdaa76496da045b3bdaadcec6d4c5398.jpg" width="900" height="600"
+                                                               src="https://www.allrecipes.com/thmb/0xH8n2D4cC97t7mcC7eT2SDZ0aE=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/6776_Pizza-Dough_ddmfs_2x1_1725-fdaa76496da045b3bdaadcec6d4c5398.jpg" width="450" height="450"
                                                                alt="..."/> </div>
                             </div>
                         </div>

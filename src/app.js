@@ -90,7 +90,7 @@ function App() {
                         {id !== null ? <Profile/> : <Error statusCode={'401'} statusMessage={'Unauthorized'} message={'To work with the profile page, you need to log in'}/>}
                     </Route>
                     <Route path="/type" exact>
-                        {!!username ? <Type/> : <Error statusCode={'401'} statusMessage={'Unauthorized'} message={'To work with the type page, you need to log in'}/>}
+                        <Type/>
                     </Route>
                     <Route path="/cart" exact>
                         {!!username ? <Cart/> : <Error statusCode={'401'} statusMessage={'Unauthorized'} message={'To work with the cart page, you need to log in'}/>}
@@ -114,7 +114,7 @@ function App() {
                         {!!username ? <Chat onSetMessage={setMessage}/> : <Error statusCode={'401'} statusMessage={'Unauthorized'} message={'To work with the chat page, you need to log in'}/>}
                     </Route>
                     <Route path='/type/:typeName' exact>
-                        {!!username ? <CurrentType/> : <Error statusCode={'401'} statusMessage={'Unauthorized'} message={'To work with the type page, you need to log in'}/>}
+                        <CurrentType/>
                     </Route>
                     <Route path='/type/:typeName/:menuId' exact>
                         {!!username ? <CurrentMenu/> : <Error statusCode={'401'} statusMessage={'Unauthorized'} message={'To work with the menu page, you need to log in'}/>}

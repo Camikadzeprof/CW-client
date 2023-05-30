@@ -9,7 +9,7 @@ aside {
 
 main {
     width: 600px;
-    height: 890px;
+    height: 500px;
     display: inline-block;
     font-size: 15px;
     vertical-align: top;
@@ -149,7 +149,7 @@ main header h3 {
     margin: 0;
     list-style-type: none;
     overflow-y: scroll;
-    height: 720px;
+    height: 450px;
     width: 1250px;
     border-top: 2px solid #fff;
     border-bottom: 2px solid #fff;

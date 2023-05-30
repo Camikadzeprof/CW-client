@@ -12,7 +12,7 @@ const Chat = ({onSetMessage}) => {
     const [messageValue, setMessageValue] = useState('');
     useEffect(() => {
         socket.connect();
-        messagesRef.current.scrollTo(0, 99999);
+        messagesRef.current.scrollTo(0, 9999);
         socket.on("SOCKET_DATA", data => {
             redux.setChatData(data);
         })
@@ -44,7 +44,7 @@ const Chat = ({onSetMessage}) => {
                         ))}
                     </ul>
                     <footer>
-                        <textarea placeholder="Write your message" value={messageValue}
+                        <textarea placeholder="Напишите своё сообщение" value={messageValue}
                                   onChange={(e) => setMessageValue(e.target.value)}/>
                         <button onClick={onSendMessage} type="button">Отправить</button>
                     </footer>

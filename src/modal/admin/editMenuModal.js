@@ -69,7 +69,7 @@ const EditMenuModal = ({closeCallback, showEditMenuModal, id}) => {
                             <input type="text" className="form-control" id="img-input"
                                    aria-describedby="imgHelp" value={imgValue}
                                    onChange={e => setImgValue(e.target.value)}/>
-                            <div id="imgHelp" className="form-text">Enter the image URL.
+                            <div id="imgHelp" className="form-text">Введите URL изображения.
                             </div>
                         </div>
                         <div className="mb-3">
@@ -81,7 +81,7 @@ const EditMenuModal = ({closeCallback, showEditMenuModal, id}) => {
                         <div className="mb-3">
                             <label htmlFor="price-input" className="form-label">Цена</label>
                             <input type="text" className="form-control" id="price-input"
-                                   placeholder="Цена" value={priceValue}
+                                   placeholder="Цена" pattern="^[0-9]*[.]?[0-9]+$" value={priceValue}
                                    onChange={e => setPriceValue(e.target.value)}/> BYN
                         </div>
                     </Modal.Body>

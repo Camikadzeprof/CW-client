@@ -76,7 +76,7 @@ const AddMenuModal = ({closeCallback, showAddMenuModal}) => {
                         <div className="mb-3">
                             <label htmlFor="price-input" className="form-label">Цена</label>
                             <input type="text" className="form-control" id="price-input"
-                                   placeholder="Цена" value={priceValue}
+                                   placeholder="Цена" pattern="^[0-9]*[.]?[0-9]+$" value={priceValue}
                                    onChange={e => setPriceValue(e.target.value)}/> BYN
                         </div>
                     </Modal.Body>
