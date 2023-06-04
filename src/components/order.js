@@ -64,20 +64,20 @@ const Order = (props) => {
                     {orders && orders.map((order, index) => (
                         <li key={index} className="list-group-item">
                             <div id="list-span">
-                                <small id="span_id">{order._id}</small>
+                                <small id="span_id" style={{marginRight: "50px", width: "150px"}}>{order._id}</small>
                             </div>
                             <div id="list-span">
-                                <small style={{marginLeft: "50px"}} id="span_amount">{order.amount.toFixed(2)} BYN</small>
+                                <small style={{width: "80px"}} id="span_amount">{order.amount.toFixed(2)} BYN</small>
                             </div>
                             <div id="list-span">
-                                {order.paid ? (<small style={{marginLeft: "50px"}} id="span_paid" style={{color: "green"}}>Оплачен</small>)
-                                    : (<small style={{marginLeft: "50px"}} id="span_paid" style={{color: "red"}}>Не оплачен</small>)}
+                                {order.paid ? (<small style={{marginLeft: "50px", width: "80px"}} id="span_paid" style={{color: "green"}}>Оплачен</small>)
+                                    : (<small style={{marginLeft: "50px", width: "80px"}} id="span_paid" style={{color: "red"}}>Не оплачен</small>)}
                             </div>
                             <div id="list-span">
-                                <small style={{marginLeft: "50px"}} id="span_address">{order.address}</small>
+                                <small style={{marginLeft: "50px", width: "220px"}} id="span_address">{order.address}</small>
                             </div>
                             <div id="list-span">
-                                <small style={{marginLeft: "50px"}} id="span_status">{order.status}</small>
+                                <small style={{marginLeft: "50px", width: "60px"}} id="span_status">{order.status}</small>
                             </div>
                             <div className="btn-group" role="group" aria-label="Basic outlined example">
                                 <NavLink to={`/order/${order._id}`} exact

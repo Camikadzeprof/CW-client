@@ -58,15 +58,17 @@ const Sidebar = (props) => {
                         <li><NavLink to="/admin" exact activeClassName="active"><i className="fas fa-user-cog"/>Администрирование</NavLink></li> : null}
                     <li><NavLink to="/" exact activeClassName="active"><i className="fas fa-home"/>Главная</NavLink>
                     </li>
+                    {!role ? null :
                     <li><NavLink to={`/profile/${id}`} activeClassName="active"><i
-                        className="fas fa-user"/>Профиль</NavLink></li>
+                        className="fas fa-user"/>Профиль</NavLink></li>}
                     <li><NavLink to="/type" activeClassName="active"><i className="fas fa-book"/>Меню</NavLink>
                     </li>
-                    {(role !== 'courier' && role !== 'admin' && role !== 'operator') ?
+                    {(role !== 'courier' && role !== 'admin' && role !== 'operator' && role) ?
                     <li><NavLink to="/cart" activeClassName="active"><i className="fas fa-shopping-cart"/>Корзина</NavLink>
                     </li> : null}
+                    {!role ? null :
                     <li><NavLink to="/order" activeClassName="active"><i className="fas fa-badge-dollar" />Заказы</NavLink>
-                    </li>
+                    </li>}
                     <li><NavLink to="/chat" activeClassName="active"><i
                         className="fas fa-paper-plane"/>Чат</NavLink></li>
                 </ul>

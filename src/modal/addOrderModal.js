@@ -35,73 +35,76 @@ const AddOrderModal = ({closeCallback, cartId, showAddOrderModal}) => {
     const addOrderSubmit = async (e) => {
         e.preventDefault();
         let order;
-        await fetch('/order', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': `Bearer ${localStorage.getItem('token')}`
-            },
-            body: JSON.stringify({
-                amount: amountValue * food.price,
-                paid: false,
-                address: addressValue,
-                status: 'Ожидает оплаты',
-                createBy: id
-            })
-        })
-            .then(data => data.json())
-            .then(data => {
-                alert(data.message);
-                order = data.orderId;
-            })
-            .catch(e => {
-                alert(e.message)
-            })
-        await fetch('/orderItem/', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': `Bearer ${localStorage.getItem('token')}`
-            },
-            body: JSON.stringify({
-                food: food,
-                amount: amountValue,
-                order: order._id
-            })
-        })
-            .catch(e => {
-                alert(e.message);
-            })
-        await fetch(`/cart/${cartId}`, {
-            method: 'DELETE',
-            headers: {
-                'Authorization': `Bearer ${localStorage.getItem('token')}`
-            }
-        })
-            .then(data => {
-            })
-            .catch(e => {
-                alert(e.message);
-            })
-        let result = window.confirm('Желаете оплатить онлайн?');
-        if (!result) {
-            await fetch(`/order/${order._id}`, {
-                method: 'PUT',
+        if (amountValue > 0) {
+            await fetch('/order', {
+                method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                     'Authorization': `Bearer ${localStorage.getItem('token')}`
                 },
                 body: JSON.stringify({
-                    paid: order.paid,
-                    address: order.address,
-                    status: 'Принят',
-                    courier: order.courier
+                    amount: amountValue * food.price,
+                    paid: false,
+                    address: addressValue,
+                    status: 'Ожидает оплаты',
+                    createBy: id
                 })
             })
+                .then(data => data.json())
+                .then(data => {
+                    alert(data.message);
+                    order = data.orderId;
+                })
+                .catch(e => {
+                    alert(e.message)
+                })
+            await fetch('/orderItem/', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${localStorage.getItem('token')}`
+                },
+                body: JSON.stringify({
+                    food: food,
+                    amount: amountValue,
+                    order: order._id
+                })
+            })
+                .catch(e => {
+                    alert(e.message);
+                })
+            await fetch(`/cart/${cartId}`, {
+                method: 'DELETE',
+                headers: {
+                    'Authorization': `Bearer ${localStorage.getItem('token')}`
+                }
+            })
+                .then(data => {
+                })
+                .catch(e => {
+                    alert(e.message);
+                })
+            let result = window.confirm('Желаете оплатить онлайн?');
+            if (!result) {
+                await fetch(`/order/${order._id}`, {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${localStorage.getItem('token')}`
+                    },
+                    body: JSON.stringify({
+                        paid: order.paid,
+                        address: order.address,
+                        status: 'Принят',
+                        courier: order.courier
+                    })
+                })
+                window.location.assign('/cart');
+            } else {
+                window.location.assign(`/payment/${order.amount}/${order._id}`);
+            }
         }
-        else {
-            window.location.assign(`/payment/${order.amount}/${order._id}`);
-        }
+        else alert('Количество должно быть больше нуля');
     }
     return (
         <>

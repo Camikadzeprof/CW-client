@@ -25,7 +25,7 @@ const CurrentMenu = () => {
             }).then(data => data.json())
                 .then(({message}) => {
                     alert(message);
-                    setAmountValue(0);
+                    setAmountValue(1);
                 })
                 .catch(e => {
                     alert(e.message)

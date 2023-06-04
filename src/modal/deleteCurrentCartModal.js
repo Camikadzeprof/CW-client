@@ -12,7 +12,7 @@ const DeleteCurrentCartModal = ({closeCallback, id, showDeleteCartModal}) => {
             .then(({message}) => {
                 alert(message);
                 closeCallback();
-                window.location.reload();
+                window.location.assign('/cart');
             })
             .catch(e => {
                 alert(e.message);

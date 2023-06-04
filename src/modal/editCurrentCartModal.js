@@ -22,22 +22,25 @@ const EditCurrentCartModal = ({closeCallback, showEditCartModal, id}) => {
     }, [])
     const editCartSubmit = async (e) => {
         e.preventDefault();
-        await fetch(`/cart/${id}`, {
-            method: 'PUT',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': `Bearer ${localStorage.getItem('token')}`
-            },
-            body: JSON.stringify({
-                amount: amountValue
+        if (amountValue > 0) {
+            await fetch(`/cart/${id}`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${localStorage.getItem('token')}`
+                },
+                body: JSON.stringify({
+                    amount: amountValue
+                })
             })
-        })
-            .then(data => data.json())
-            .then(({message}) => {
-                alert(message);
-                closeCallback();
-                window.location.reload();
-            })
+                .then(data => data.json())
+                .then(({message}) => {
+                    alert(message);
+                    closeCallback();
+                    window.location.reload();
+                })
+        }
+        else alert('Количество должно быть больше нуля');
     }
     return (
         <>

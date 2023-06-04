@@ -38,7 +38,8 @@ const Cart = (props) => {
             .then(data => data.json())
             .then(({message}) => {
                 alert(message);
-                window.location.reload();
+                redux.clearCarts();
+                setFlag(false);
             })
     }
 
