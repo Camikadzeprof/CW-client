@@ -7,7 +7,7 @@ const Error = ({statusCode, statusMessage, message}) => {
                 <div id="notfound">
                     <div className="notfound">
                         <div className="notfound-404">
-                            <h3>Oops! {statusMessage}</h3>
+                            <h3>Упс! {statusMessage}</h3>
                             <h1><span>{statusCode}</span></h1>
                         </div>
                         <h2>{message}</h2>
