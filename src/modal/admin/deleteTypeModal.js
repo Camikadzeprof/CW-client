@@ -1,8 +1,10 @@
 import {Button, Modal} from "react-bootstrap";
+import useActions from "../../helpers/hooks/useActions";
 
 const DeleteTypeModal = ({closeCallback, typeName, showDeleteTypeModal}) => {
+    const redux = useActions();
     const deleteTypeClick = async (typeName) => {
-        await fetch(`/type/${typeName}`, {
+        fetch(`/type/${typeName}`, {
             method: 'DELETE',
             headers: {
                 'Authorization': `Bearer ${localStorage.getItem('token')}`
@@ -10,9 +12,27 @@ const DeleteTypeModal = ({closeCallback, typeName, showDeleteTypeModal}) => {
         })
             .then(data => data.json())
             .then(({message}) => {
-                alert(message);
                 closeCallback();
-                window.location.reload();
+                fetch('/type', {
+                    method: 'GET'
+                })
+                    .then(data => data.json())
+                    .then(types => {
+                        redux.getTypes(types);
+                    })
+                fetch('/menu', {
+                    method: 'GET',
+                    headers: {
+                        'Authorization': `Bearer ${localStorage.getItem('token')}`
+                    }
+                })
+                    .then(data => data.json())
+                    .then(menus => {
+                        redux.getMenu(menus);
+                    })
+                    .catch(e => {
+                        console.log(e.message)
+                    })
             })
             .catch(e => {
                 alert(e.message);

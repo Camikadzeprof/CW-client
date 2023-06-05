@@ -9,7 +9,7 @@ const CurrentType = () => {
     const redux = useActions();
     useEffect(() => {
         (async () => {
-                await fetch(`/type/${typeName}`, {
+                fetch(`/type/${typeName}`, {
                     method: 'GET'
                 })
                     .then(data => data.json())

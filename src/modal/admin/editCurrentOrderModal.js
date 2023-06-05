@@ -1,8 +1,10 @@
 import {Button, Modal} from "react-bootstrap";
 import React, {useEffect, useState} from "react";
 import {useSelector} from "react-redux";
+import useActions from "../../helpers/hooks/useActions";
 
 const EditCurrentOrderModal = ({closeCallback, showEditOrderModal, id}) => {
+    const redux = useActions();
     const [paidValue, setPaidValue] = useState(false);
     const [addressValue, setAddressValue] = useState('');
     const [statusValue, setStatusValue] = useState('');
@@ -10,7 +12,7 @@ const EditCurrentOrderModal = ({closeCallback, showEditOrderModal, id}) => {
     const {role} = useSelector(state => state.user);
     useEffect(() => {
         (async () => {
-            await fetch(`/order/${id}`, {
+            fetch(`/order/${id}`, {
                 method: 'GET',
                 headers: {
                     'Authorization': `Bearer ${localStorage.getItem('token')}`
@@ -27,8 +29,7 @@ const EditCurrentOrderModal = ({closeCallback, showEditOrderModal, id}) => {
     }, [])
     const editOrderSubmit = async (e) => {
         e.preventDefault();
-        if (paidValue && statusValue == "Ожидание оплаты") setStatusValue("Принят");
-        await fetch(`/order/${id}`, {
+        fetch(`/order/${id}`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
@@ -43,9 +44,27 @@ const EditCurrentOrderModal = ({closeCallback, showEditOrderModal, id}) => {
         })
             .then(data => data.json())
             .then(({message}) => {
-                alert(message);
                 closeCallback();
-                window.location.reload();
+                fetch(`/order/${id}`, {
+                    method: 'GET',
+                    headers: {
+                        'Authorization': `Bearer ${localStorage.getItem('token')}`
+                    }
+                })
+                    .then(data => data.json())
+                    .then(({_id, amount, paid, address, status, courier, createdBy, createdAt}) => {
+                        redux.getCurrentOrder(_id, amount, paid, address, status, courier, createdBy, createdAt);
+                    })
+                fetch(`/orderItems/${id}`, {
+                    method: 'GET',
+                    headers: {
+                        'Authorization': `Bearer ${localStorage.getItem('token')}`
+                    }
+                })
+                    .then(data => data.json())
+                    .then(orderItems => {
+                        redux.getOrderItems(orderItems);
+                    })
             })
     }
     const {_id, amount, paid, address, status, courier} = useSelector(state => state.order);

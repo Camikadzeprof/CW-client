@@ -1,11 +1,13 @@
 import React, {useState} from "react";
 import {Button, Modal} from "react-bootstrap";
+import useActions from "../../helpers/hooks/useActions";
 
 const AddTypeModal = ({closeCallback, showAddTypeModal}) => {
     const [nameValue, setNameValue] = useState('');
+    const redux = useActions();
     const addTypeSubmit = async (e) => {
         e.preventDefault();
-        await fetch('/type', {
+        fetch('/type', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -17,14 +19,18 @@ const AddTypeModal = ({closeCallback, showAddTypeModal}) => {
         })
             .then(data => data.json())
             .then(({message}) => {
-                alert(message);
                 closeCallback();
-                window.location.reload();
+                fetch('/type', {
+                    method: 'GET'
+                })
+                    .then(data => data.json())
+                    .then(types => {
+                        redux.getTypes(types);
+                    })
             })
             .catch(e => {
                 alert(e.message)
             })
-
     }
     return (
         <>

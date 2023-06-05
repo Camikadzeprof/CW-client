@@ -35,7 +35,6 @@ const SignUpModal = ({closeCallback}) => {
             .then(({message}) => {
                 alert(message);
                 closeCallback();
-                window.location.reload();
             })
             .catch(e => {
                 alert(e.message);
@@ -61,7 +60,7 @@ const SignUpModal = ({closeCallback}) => {
                                 <div className="mb-3">
                                     <label htmlFor="phone-input" className="form-label">Номер телефона</label>
                                     <input type="text" className="form-control" id="phone-input"
-                                           aria-describedby="phoneHelp" pattern="[0-9]{12}"
+                                           aria-describedby="phoneHelp" required="true" pattern="[0-9]{12}"
                                            value={phone} onChange={e => setPhone(e.target.value)}/>
                                     <div id="phoneHelp" className="form-text">Мы не будем разглашать ваш номер телефона кому-либо.
                                     </div>

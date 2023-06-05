@@ -13,7 +13,7 @@ const Profile = () => {
     const redirect = (path) => history.push(path);
     useEffect(() => {
         (async () => {
-            await fetch(`/user/${id}`, {
+            fetch(`/user/${id}`, {
                 method: 'GET',
                 headers: {
                     'Authorization': `Bearer ${localStorage.getItem('token')}`
@@ -27,7 +27,7 @@ const Profile = () => {
                     alert(e.message);
                 })
             if (role === 'user') {
-                await fetch(`/orders/user/${id}`, {
+                fetch(`/orders/user/${id}`, {
                     method: 'GET',
                     headers: {
                         'Authorization': `Bearer ${localStorage.getItem('token')}`
@@ -39,7 +39,7 @@ const Profile = () => {
                     })
             }
             else if (role === 'courier') {
-                await fetch(`/orders/courier/${id}`, {
+                fetch(`/orders/courier/${id}`, {
                     method: 'GET',
                     headers: {
                         'Authorization': `Bearer ${localStorage.getItem('token')}`

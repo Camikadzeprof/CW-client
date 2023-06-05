@@ -2,7 +2,7 @@ import {Button, Modal} from "react-bootstrap";
 
 const DeleteCurrentCartModal = ({closeCallback, id, showDeleteCartModal}) => {
     const deleteCartClick = async (id) => {
-        await fetch(`/cart/${id}`, {
+        fetch(`/cart/${id}`, {
             method: 'DELETE',
             headers: {
                 'Authorization': `Bearer ${localStorage.getItem('token')}`

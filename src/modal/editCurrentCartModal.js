@@ -1,14 +1,16 @@
 import {Button, Modal} from "react-bootstrap";
 import React, {useEffect, useState} from "react";
 import {useSelector} from "react-redux";
+import useActions from "../helpers/hooks/useActions";
 
 const EditCurrentCartModal = ({closeCallback, showEditCartModal, id}) => {
+    const redux = useActions();
     const [foodValue, setFoodValue] = useState('');
     const [amountValue, setAmountValue] = useState('');
     const {userId} = useSelector(state => state.user);
     useEffect(() => {
         (async () => {
-            await fetch(`/cart/${id}`, {
+            fetch(`/cart/${id}`, {
                 method: 'GET',
                 headers: {
                     'Authorization': `Bearer ${localStorage.getItem('token')}`
@@ -23,7 +25,7 @@ const EditCurrentCartModal = ({closeCallback, showEditCartModal, id}) => {
     const editCartSubmit = async (e) => {
         e.preventDefault();
         if (amountValue > 0) {
-            await fetch(`/cart/${id}`, {
+            fetch(`/cart/${id}`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
@@ -37,7 +39,16 @@ const EditCurrentCartModal = ({closeCallback, showEditCartModal, id}) => {
                 .then(({message}) => {
                     alert(message);
                     closeCallback();
-                    window.location.reload();
+                    fetch(`/cart/${id}`, {
+                        method: 'GET',
+                        headers: {
+                            'Authorization': `Bearer ${localStorage.getItem('token')}`
+                        }
+                    })
+                        .then(data => data.json())
+                        .then(({_id, food, amount, quantity}) => {
+                            redux.getCurrentCart(_id, food, amount, quantity);
+                        })
                 })
         }
         else alert('Количество должно быть больше нуля');

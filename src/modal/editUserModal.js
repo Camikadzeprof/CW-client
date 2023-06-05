@@ -15,7 +15,7 @@ const EditUserModal = ({closeCallback}) => {
     const {id} = useParams();
     const editUserSubmit = async (event) => {
         event.preventDefault();
-        await fetch(`/user/${id}`, {
+        fetch(`/user/${id}`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
@@ -27,7 +27,6 @@ const EditUserModal = ({closeCallback}) => {
             })
         }).then(() => {
             closeCallback();
-            window.location.reload();
             redux.getUserById(emailValue, phoneValue);
         })
             .catch(e => {

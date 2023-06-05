@@ -17,7 +17,7 @@ const CurrentCart = () => {
 
     useEffect(() => {
         (async () => {
-            await fetch(`/cart/${cartId}`, {
+            fetch(`/cart/${cartId}`, {
                 method: 'GET',
                 headers: {
                     'Authorization': `Bearer ${localStorage.getItem('token')}`

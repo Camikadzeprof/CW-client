@@ -84,49 +84,46 @@ function App() {
                         <Home/>
                     </Route>
                     <Route path="/admin" exact>
-                        {id !== null ? (role == 'admin' ? <AdminPanel/> : <Error statusCode={'401'} statusMessage={'Unauthorized'} message={'To work with the admin page, you must be an admin'}/>) : <Error statusCode={'401'} statusMessage={'Unauthorized'} message={'To work with the profile page, you need to log in'}/>}
+                        {id !== null ? (role == 'admin' ? <AdminPanel/> : <Error statusCode={'401'} statusMessage={'Неавторизован'} message={'Вы должны быть администратором, чтобы просматривать данный раздел'}/>) : <Error statusCode={'401'} statusMessage={'Неавторизован'} message={'Вы должны войти в свой аккаунт, чтобы просматривать данный раздел'}/>}
                     </Route>
                     <Route path="/profile/:id" exact>
-                        {id !== null ? <Profile/> : <Error statusCode={'401'} statusMessage={'Unauthorized'} message={'To work with the profile page, you need to log in'}/>}
+                        {id !== null ? <Profile/> : <Error statusCode={'401'} statusMessage={'Неавторизован'} message={'Вы должны войти в свой аккаунт, чтобы просматривать профиль'}/>}
                     </Route>
                     <Route path="/type" exact>
                         <Type/>
                     </Route>
                     <Route path="/cart" exact>
-                        {!!username ? <Cart/> : <Error statusCode={'401'} statusMessage={'Unauthorized'} message={'To work with the cart page, you need to log in'}/>}
-                    </Route>
-                    <Route path="/carts/user/:userId" exact>
-                        {!!username ? <Cart/> : <Error statusCode={'401'} statusMessage={'Unauthorized'} message={'To work with the cart page, you need to log in'}/>}
+                        {!!username ? <Cart/> : <Error statusCode={'401'} statusMessage={'Неавторизован'} message={'Вы должны войти в свой аккаунт, чтобы работать с корзиной'}/>}
                     </Route>
                     <Route path="/cart/:cartId" exact>
-                        {!!username ? <CurrentCart/> : <Error statusCode={'401'} statusMessage={'Unauthorized'} message={'To work with the cart page, you need to log in'}/>}
+                        {!!username ? <CurrentCart/> : <Error statusCode={'401'} statusMessage={'Неавторизован'} message={'Вы должны войти в свой аккаунт, чтобы работать с корзиной'}/>}
                     </Route>
                     <Route path="/order" exact>
-                        {!!username ? <Order/> : <Error statusCode={'401'} statusMessage={'Unauthorized'} message={'To work with the cart page, you need to log in'}/>}
+                        {!!username ? <Order/> : <Error statusCode={'401'} statusMessage={'Неавторизован'} message={'Вы должны войти в свой аккаунт, чтобы работать с заказами'}/>}
                     </Route>
                     <Route path="/order/user/:userId" exact>
-                        {!!username ? <Order/> : <Error statusCode={'401'} statusMessage={'Unauthorized'} message={'To work with the cart page, you need to log in'}/>}
+                        {!!username ? <Order/> : <Error statusCode={'401'} statusMessage={'Неавторизован'} message={'Вы должны войти в свой аккаунт, чтобы работать с заказами'}/>}
                     </Route>
                     <Route path="/order/:orderId" exact>
-                        {!!username ? <CurrentOrder/> : <Error statusCode={'401'} statusMessage={'Unauthorized'} message={'To work with the cart page, you need to log in'}/>}
+                        {!!username ? <CurrentOrder/> : <Error statusCode={'401'} statusMessage={'Неавторизован'} message={'Вы должны войти в свой аккаунт, чтобы работать с заказами'}/>}
                     </Route>
                     <Route path="/chat" exact>
-                        {!!username ? <Chat onSetMessage={setMessage}/> : <Error statusCode={'401'} statusMessage={'Unauthorized'} message={'To work with the chat page, you need to log in'}/>}
+                        {!!username ? <Chat onSetMessage={setMessage}/> : <Error statusCode={'401'} statusMessage={'Неавторизован'} message={'Вы должны войти в свой аккаунт, чтобы пользоваться чатом'}/>}
                     </Route>
-                    <Route path='/type/:typeName' exact>
+                    <Route path="/type/:typeName" exact>
                         <CurrentType/>
                     </Route>
-                    <Route path='/type/:typeName/:menuId' exact>
-                        {!!username ? <CurrentMenu/> : <Error statusCode={'401'} statusMessage={'Unauthorized'} message={'To work with the menu page, you need to log in'}/>}
+                    <Route path="/type/:typeName/:menuId" exact>
+                        {!!username ? <CurrentMenu/> : <Error statusCode={'401'} statusMessage={'Неавторизован'} message={'Вы должны войти в свой аккаунт, чтобы просматривать блюдо'}/>}
                     </Route>
-                    <Route path='/payment/:amount/:orderId' exact>
+                    <Route path="/payment/:amount/:orderId" exact>
                         {!!username ?
                             <Elements stripe={stripePromise}>
                                 <Payment/>
                             </Elements>
-                            : <Error statusCode={'401'} statusMessage={'Unauthorized'} message={'To pay for orders you need to be log in'}/>}
+                            : <Error statusCode={'401'} statusMessage={'Неавторизован'} message={'Вы должны войти в свой аккаунт, чтобы платить за заказы'}/>}
                     </Route>
-                    <Redirect to={'/order'}/>
+                    <Redirect to="/order"/>
                 </Switch>
             </div>
         </BrowserRouter>

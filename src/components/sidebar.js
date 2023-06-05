@@ -22,7 +22,9 @@ const Sidebar = (props) => {
                 console.log(value.message);
                 localStorage.removeItem('token');
                 redux.logoutUser();
-                redux.clearTypes();
+                redux.clearCarts();
+                redux.clearOrders();
+                redux.clearOrderItems();
                 socket.emit("USER_DISCONNECTED", username);
                 socket.disconnect();
                 redirect('/');

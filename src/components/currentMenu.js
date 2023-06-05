@@ -11,7 +11,7 @@ const CurrentMenu = () => {
     const sendCartSubmit = async (e) => {
         e.preventDefault();
         if (amountValue > 0) {
-            await fetch('/cart', {
+            fetch('/cart', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -37,7 +37,7 @@ const CurrentMenu = () => {
     }
     useEffect(() => {
         (async () => {
-            await fetch(`/menu/${menuId}`, {
+            fetch(`/menu/${menuId}`, {
                 method: 'GET',
                 headers: {
                     'Authorization': `Bearer ${localStorage.getItem('token')}`

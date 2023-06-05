@@ -7,7 +7,7 @@ const Type = (props) => {
     const redux = useActions();
     useEffect(() => {
         (async () => {
-            await fetch('/type', {
+            fetch('/type', {
                 method: 'GET'
             })
                 .then(data => data.json())

@@ -1,7 +1,9 @@
 import React, {useState} from "react";
 import {Button, Modal} from "react-bootstrap";
+import useActions from "../../helpers/hooks/useActions";
 
 const AddMenuModal = ({closeCallback, showAddMenuModal}) => {
+    const redux = useActions();
     const [nameValue, setNameValue] = useState('');
     const [typeValue, setTypeValue] = useState('');
     const [imgValue, setImgValue] = useState('');
@@ -9,7 +11,7 @@ const AddMenuModal = ({closeCallback, showAddMenuModal}) => {
     const [priceValue, setPriceValue] = useState('');
     const addMenuSubmit = async (e) => {
         e.preventDefault();
-        await fetch('/menu', {
+        fetch('/menu', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -27,8 +29,22 @@ const AddMenuModal = ({closeCallback, showAddMenuModal}) => {
             .then(({message}) => {
                 if (message === 'Введите существующий тип')
                     alert(message);
-                else
-                    window.location.reload();
+                else {
+                    closeCallback();
+                    fetch('/menu', {
+                        method: 'GET',
+                        headers: {
+                            'Authorization': `Bearer ${localStorage.getItem('token')}`
+                        }
+                    })
+                        .then(data => data.json())
+                        .then(menus => {
+                            redux.getMenu(menus);
+                        })
+                        .catch(e => {
+                            console.log(e.message)
+                        })
+                }
             })
             .catch(e => {
                 alert(e.message)

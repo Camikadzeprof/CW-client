@@ -1,7 +1,9 @@
 import {Button, Modal} from "react-bootstrap";
 import React, {useEffect, useState} from "react";
+import useActions from "../../helpers/hooks/useActions";
 
 const EditMenuModal = ({closeCallback, showEditMenuModal, id}) => {
+    const redux = useActions();
     const [nameValue, setNameValue] = useState('');
     const [typeValue, setTypeValue] = useState('');
     const [imgValue, setImgValue] = useState('');
@@ -9,7 +11,7 @@ const EditMenuModal = ({closeCallback, showEditMenuModal, id}) => {
     const [priceValue, setPriceValue] = useState('');
     useEffect(() => {
         (async () => {
-            await fetch(`/menu/${id}`, {
+            fetch(`/menu/${id}`, {
                 method: 'GET',
                 headers: {
                     'Authorization': `Bearer ${localStorage.getItem('token')}`
@@ -26,7 +28,7 @@ const EditMenuModal = ({closeCallback, showEditMenuModal, id}) => {
     }, [])
     const editMenuSubmit = async (e) => {
         e.preventDefault();
-        await fetch(`/menu/${id}`, {
+        fetch(`/menu/${id}`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
@@ -41,9 +43,20 @@ const EditMenuModal = ({closeCallback, showEditMenuModal, id}) => {
         })
             .then(data => data.json())
             .then(({message}) => {
-                alert(message);
                 closeCallback();
-                window.location.reload();
+                fetch('/menu', {
+                    method: 'GET',
+                    headers: {
+                        'Authorization': `Bearer ${localStorage.getItem('token')}`
+                    }
+                })
+                    .then(data => data.json())
+                    .then(menus => {
+                        redux.getMenu(menus);
+                    })
+                    .catch(e => {
+                        console.log(e.message)
+                    })
             })
     }
     return (

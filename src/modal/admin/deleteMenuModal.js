@@ -1,8 +1,10 @@
 import {Button, Modal} from "react-bootstrap";
+import useActions from "../../helpers/hooks/useActions";
 
 const DeleteMenuModal = ({closeCallback, id, showDeleteMenuModal}) => {
+    const redux = useActions();
     const deleteMenuClick = async (id) => {
-        await fetch(`/menu/${id}`, {
+        fetch(`/menu/${id}`, {
             method: 'DELETE',
             headers: {
                 'Authorization': `Bearer ${localStorage.getItem('token')}`
@@ -10,9 +12,20 @@ const DeleteMenuModal = ({closeCallback, id, showDeleteMenuModal}) => {
         })
             .then(data => data.json())
             .then(({message}) => {
-                alert(message);
                 closeCallback();
-                window.location.reload();
+                fetch('/menu', {
+                    method: 'GET',
+                    headers: {
+                        'Authorization': `Bearer ${localStorage.getItem('token')}`
+                    }
+                })
+                    .then(data => data.json())
+                    .then(menus => {
+                        redux.getMenu(menus);
+                    })
+                    .catch(e => {
+                        console.log(e.message)
+                    })
             })
             .catch(e => {
                 alert(e.message);

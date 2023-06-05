@@ -9,7 +9,7 @@ const ShowUserModal = ({closeCallback, userId}) => {
     const [phoneValue, setPhoneValue] = useState('');
     useEffect(() => {
         (async () => {
-            await fetch(`/user/${userId}`, {
+            fetch(`/user/${userId}`, {
                 method: 'GET',
                 headers: {
                     'Authorization': `Bearer ${localStorage.getItem('token')}`

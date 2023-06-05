@@ -17,7 +17,7 @@ const AddOrderListModal = ({closeCallback, showAddOrderListModal}) => {
     useEffect(() => {
         (async () => {
             if (token) {
-                await fetch(`/carts/user/${id}`, {
+                fetch(`/carts/user/${id}`, {
                     method: 'GET',
                     headers: {
                         'Authorization': `Bearer ${token}`
@@ -71,7 +71,7 @@ const AddOrderListModal = ({closeCallback, showAddOrderListModal}) => {
                 alert(e.message)
             })
         for (let i = 0; i < crts.length; i++) {
-            await fetch('/orderItem', {
+            fetch('/orderItem', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -84,15 +84,18 @@ const AddOrderListModal = ({closeCallback, showAddOrderListModal}) => {
                 })
             })
         }
-        await fetch(`/carts/user/${id}`, {
+        fetch(`/carts/user/${id}`, {
             method: 'DELETE',
             headers: {
                 'Authorization': `Bearer ${token}`
             }
-        })
+        }).then(data => data.json())
+            .then(data => {
+                redux.clearCarts();
+            })
         let result = window.confirm('Желаете оплатить онлайн?');
         if (!result) {
-            await fetch(`/order/${order._id}`, {
+            fetch(`/order/${order._id}`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
@@ -105,7 +108,17 @@ const AddOrderListModal = ({closeCallback, showAddOrderListModal}) => {
                     courier: order.courier
                 })
             })
-            window.location.reload();
+            closeCallback();
+            fetch(`/orders/user/${id}`, {
+                method: 'GET',
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                }
+            })
+                .then(data => data.json())
+                .then(orders => {
+                    redux.getOrders(orders);
+                })
         }
         else {
             window.location.assign(`/payment/${order.amount}/${order._id}`);

@@ -16,7 +16,7 @@ const AddOrderModal = ({closeCallback, cartId, showAddOrderModal}) => {
     useEffect(() => {
         (async () => {
             if (token) {
-                await fetch(`/cart/${cartId}`, {
+                fetch(`/cart/${cartId}`, {
                     method: 'GET',
                     headers: {
                         'Authorization': `Bearer ${token}`
@@ -58,7 +58,7 @@ const AddOrderModal = ({closeCallback, cartId, showAddOrderModal}) => {
                 .catch(e => {
                     alert(e.message)
                 })
-            await fetch('/orderItem/', {
+            fetch('/orderItem/', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -73,7 +73,7 @@ const AddOrderModal = ({closeCallback, cartId, showAddOrderModal}) => {
                 .catch(e => {
                     alert(e.message);
                 })
-            await fetch(`/cart/${cartId}`, {
+            fetch(`/cart/${cartId}`, {
                 method: 'DELETE',
                 headers: {
                     'Authorization': `Bearer ${localStorage.getItem('token')}`
@@ -86,7 +86,7 @@ const AddOrderModal = ({closeCallback, cartId, showAddOrderModal}) => {
                 })
             let result = window.confirm('Желаете оплатить онлайн?');
             if (!result) {
-                await fetch(`/order/${order._id}`, {
+                fetch(`/order/${order._id}`, {
                     method: 'PUT',
                     headers: {
                         'Content-Type': 'application/json',
@@ -99,6 +99,16 @@ const AddOrderModal = ({closeCallback, cartId, showAddOrderModal}) => {
                         courier: order.courier
                     })
                 })
+                fetch(`/orders/user/${id}`, {
+                    method: 'GET',
+                    headers: {
+                        'Authorization': `Bearer ${token}`
+                    }
+                })
+                    .then(data => data.json())
+                    .then(orders => {
+                        redux.getOrders(orders);
+                    })
                 window.location.assign('/cart');
             } else {
                 window.location.assign(`/payment/${order.amount}/${order._id}`);

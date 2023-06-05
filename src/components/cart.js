@@ -13,7 +13,7 @@ const Cart = (props) => {
     useEffect(() => {
         (async () => {
             if (token) {
-                await fetch(`/carts/user/${id}`, {
+                fetch(`/carts/user/${id}`, {
                     method: 'GET',
                     headers: {
                         'Authorization': `Bearer ${token}`
@@ -29,7 +29,7 @@ const Cart = (props) => {
         })()
     }, [])
     async function clear() {
-        await fetch(`/carts/user/${id}`, {
+        fetch(`/carts/user/${id}`, {
             method: 'DELETE',
             headers: {
                 'Authorization': `Bearer ${token}`
@@ -67,13 +67,12 @@ const Cart = (props) => {
                             </li>
                         ))}
                     </ul>
-                    {console.log(flag)}
-                    {flag ? <button type="button" className="btn btn-success" onClick={() => {
+                    {carts.length > 0 ? <button type="button" className="btn btn-success" onClick={() => {
                         toggleAddOrderListModal(true);
                     }}>Сделать заказ
                     </button> : <h5>Корзина пуста</h5>
                     }
-                    {flag ? <button type="button" className="btn btn-danger" onClick={() => clear()}>
+                    {carts.length > 0 ? <button type="button" className="btn btn-danger" onClick={() => clear()}>
                             Очистить корзину
                         </button> :
                         null

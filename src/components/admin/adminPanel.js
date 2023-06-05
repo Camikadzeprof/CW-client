@@ -5,7 +5,6 @@ import {useSelector} from "react-redux";
 import AddTypeModal from "../../modal/admin/addTypeModal";
 import AddMenuModal from "../../modal/admin/addMenuModal";
 import ShowUserModal from "../../modal/admin/showUserModal";
-import EditUserModal from "../../modal/admin/editUserModal";
 import DeleteUserModal from "../../modal/admin/deleteUserModal";
 import EditTypeModal from "../../modal/admin/editTypeModal";
 import DeleteTypeModal from "../../modal/admin/deleteTypeModal";
@@ -18,7 +17,6 @@ const AdminPanel = (props) => {
     const [showAddTypeModal, toggleAddTypeModal] = useState(false);
     const [showAddMenuModal, toggleAddMenuModal] = useState(false);
     const [showShowUserModal, toggleShowUserModal] = useState(false);
-    const [showEditUserModal, toggleEditUserModal] = useState(false);
     const [showEditTypeModal, toggleEditTypeModal] = useState(false);
     const [showEditMenuModal, toggleEditMenuModal] = useState(false);
     const [showDeleteTypeModal, toggleDeleteTypeModal] = useState(false);
@@ -29,7 +27,7 @@ const AdminPanel = (props) => {
     const [currentOrderIdValue, setCurrentOrderIdValue] = useState(null);
     useEffect(() => {
         (async () => {
-            await fetch('/user', {
+            fetch('/user', {
                 method: 'GET',
                 headers: {
                     'Authorization': `Bearer ${localStorage.getItem('token')}`
@@ -41,7 +39,7 @@ const AdminPanel = (props) => {
                 })
         })();
         (async () => {
-            await fetch('/type', {
+            fetch('/type', {
                 method: 'GET',
                 headers: {
                     'Authorization': `Bearer ${localStorage.getItem('token')}`
@@ -56,7 +54,7 @@ const AdminPanel = (props) => {
                 })
         })();
         (async () => {
-            await fetch('/menu', {
+            fetch('/menu', {
                 method: 'GET',
                 headers: {
                     'Authorization': `Bearer ${localStorage.getItem('token')}`
@@ -70,26 +68,10 @@ const AdminPanel = (props) => {
                     console.log(e.message)
                 })
         })();
-        (async () => {
-            await fetch('/order', {
-                method: 'GET',
-                headers: {
-                    'Authorization': `Bearer ${localStorage.getItem('token')}`
-                }
-            })
-                .then(data => data.json())
-                .then(orders => {
-                    redux.getMenu(orders);
-                })
-                .catch(e => {
-                    console.log(e.message)
-                })
-        })();
     }, [])
     const {users} = useSelector(state => state.user);
     const {types} = useSelector(state => state.type);
     const {menus} = useSelector(state => state.menu);
-    const {orders} = useSelector(state => state.order);
     return (
         <>
             {showDeleteUserModal ? <DeleteUserModal closeCallback={() => toggleDeleteUserModal(false)}
@@ -97,8 +79,6 @@ const AdminPanel = (props) => {
                                                     userId={currentUserIdValue}/> : null}
             {showShowUserModal ?
                 <ShowUserModal closeCallback={() => toggleShowUserModal(false)} userId={currentUserIdValue}/> : null}
-            {showEditUserModal ?
-                <EditUserModal closeCallback={() => toggleEditUserModal(false)} userId={currentUserIdValue}/> : null}
             {showAddTypeModal ? <AddTypeModal closeCallback={() => toggleAddTypeModal(false)}
                                                 showAddTypeModal={showAddTypeModal}/> : null}
             {showEditTypeModal ? <EditTypeModal closeCallback={() => toggleEditTypeModal(false)}

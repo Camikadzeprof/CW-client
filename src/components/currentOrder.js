@@ -15,7 +15,7 @@ const CurrentOrder = () => {
 
     useEffect(() => {
         (async () => {
-            await fetch(`/order/${orderId}`, {
+            fetch(`/order/${orderId}`, {
                 method: 'GET',
                 headers: {
                     'Authorization': `Bearer ${localStorage.getItem('token')}`
@@ -25,7 +25,7 @@ const CurrentOrder = () => {
                 .then(({_id, amount, paid, address, status, courier, createdBy, createdAt}) => {
                     redux.getCurrentOrder(_id, amount, paid, address, status, courier, createdBy, createdAt);
                 })
-            await fetch(`/orderItems/${orderId}`, {
+            fetch(`/orderItems/${orderId}`, {
                 method: 'GET',
                 headers: {
                     'Authorization': `Bearer ${localStorage.getItem('token')}`
@@ -40,7 +40,7 @@ const CurrentOrder = () => {
     const {_id, amount, paid, address, status, courier, createdBy, createdAt} = useSelector(state => state.order);
     const {orderItems} = useSelector(state => state.orderItem)
     async function acceptForDeliveryClick() {
-        await fetch(`/order/${orderId}`, {
+        fetch(`/order/${orderId}`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
@@ -56,14 +56,14 @@ const CurrentOrder = () => {
             .then(data => window.location.reload())
     }
     async function deliveredClick() {
-        await fetch(`/order/${orderId}`, {
+        fetch(`/order/${orderId}`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
                 'Authorization': `Bearer ${localStorage.getItem('token')}`
             },
             body: JSON.stringify({
-                paid: paid,
+                paid: true,
                 address: address,
                 status: 'Выполнен',
                 courier: courier

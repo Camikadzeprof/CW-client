@@ -12,7 +12,7 @@ const Order = (props) => {
         (async () => {
             if (role === 'admin' || role === 'operator') {
                 if (token) {
-                    await fetch(`/orders`, {
+                    fetch(`/orders`, {
                         method: 'GET',
                         headers: {
                             'Authorization': `Bearer ${token}`
@@ -26,7 +26,7 @@ const Order = (props) => {
             }
             else if (role === 'user') {
                 if (token) {
-                    await fetch(`/orders/user/${id}`, {
+                    fetch(`/orders/user/${id}`, {
                         method: 'GET',
                         headers: {
                             'Authorization': `Bearer ${token}`
@@ -40,7 +40,7 @@ const Order = (props) => {
             }
             else if (role === 'courier') {
                 if (token) {
-                    await fetch(`/orders/status/${stat}`, {
+                    fetch(`/orders/status/${stat}`, {
                         method: 'GET',
                         headers: {
                             'Authorization': `Bearer ${token}`
@@ -61,7 +61,7 @@ const Order = (props) => {
             <div className="info">
                 <h2>Заказы</h2>
                 <ul className="list-group">
-                    {orders && orders.map((order, index) => (
+                    {orders.length > 0 ? orders.map((order, index) => (
                         <li key={index} className="list-group-item">
                             <div id="list-span">
                                 <small id="span_id" style={{marginRight: "50px", width: "150px"}}>{order._id}</small>
@@ -84,7 +84,7 @@ const Order = (props) => {
                                          className="btn btn-outline-primary">Показать</NavLink>
                             </div>
                         </li>
-                    ))}
+                    )) : <h5>Нет заказов</h5>}
                 </ul>
             </div>
         </div>

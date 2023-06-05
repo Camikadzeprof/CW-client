@@ -1,9 +1,11 @@
 import {Button, Modal} from "react-bootstrap";
 import React, {useEffect, useState} from "react";
+import useActions from "../../helpers/hooks/useActions";
 
 const EditTypeModal = ({closeCallback, showEditTypeModal, typeName}) => {
     const [nameValue, setNameValue] = useState(typeName);
     const [idValue, setIdValue] = useState('');
+    const redux = useActions();
     useEffect(() => {
         (async () => {
             await fetch(`/type/${typeName}`, {
@@ -20,7 +22,7 @@ const EditTypeModal = ({closeCallback, showEditTypeModal, typeName}) => {
     }, [])
     const editTypeSubmit = async (e) => {
         e.preventDefault();
-        await fetch(`/type/${idValue}`, {
+        fetch(`/type/${idValue}`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
@@ -32,9 +34,14 @@ const EditTypeModal = ({closeCallback, showEditTypeModal, typeName}) => {
         })
             .then(data => data.json())
             .then(({message}) => {
-                alert(message);
                 closeCallback();
-                window.location.reload();
+                fetch('/type', {
+                    method: 'GET'
+                })
+                    .then(data => data.json())
+                    .then(types => {
+                        redux.getTypes(types);
+                    })
             })
     }
     return (

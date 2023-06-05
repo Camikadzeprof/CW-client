@@ -1,8 +1,10 @@
 import {Button, Modal} from "react-bootstrap";
+import useActions from "../../helpers/hooks/useActions";
 
 const DeleteUserModal = ({closeCallback, showDeleteUserModal, userId}) => {
+    const redux = useActions();
     const deleteUserClick = async (userId) => {
-        await fetch(`/user/${userId}`, {
+        fetch(`/user/${userId}`, {
             method: 'DELETE',
             headers: {
                 'Authorization': `Bearer ${localStorage.getItem('token')}`
@@ -10,9 +12,17 @@ const DeleteUserModal = ({closeCallback, showDeleteUserModal, userId}) => {
         })
             .then(data => data.json())
             .then(({message}) => {
-                alert(message);
                 closeCallback();
-                window.location.reload();
+                fetch('/user', {
+                    method: 'GET',
+                    headers: {
+                        'Authorization': `Bearer ${localStorage.getItem('token')}`
+                    }
+                })
+                    .then(data => data.json())
+                    .then(users => {
+                        redux.getAllUsers(users);
+                    })
             })
             .catch(e => {
                 alert(e.message);

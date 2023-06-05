@@ -1,9 +1,10 @@
 import {Button, Modal} from "react-bootstrap";
-import {useSelector} from "react-redux";
+import useActions from "../../helpers/hooks/useActions";
 
 const DeleteCurrentOrderModal = ({closeCallback, id, showDeleteOrderModal}) => {
+    const redux = useActions();
     const deleteOrderClick = async (id) => {
-        await fetch(`/order/${id}`, {
+        fetch(`/order/${id}`, {
             method: 'DELETE',
             headers: {
                 'Authorization': `Bearer ${localStorage.getItem('token')}`
@@ -11,9 +12,28 @@ const DeleteCurrentOrderModal = ({closeCallback, id, showDeleteOrderModal}) => {
         })
             .then(data => data.json())
             .then(({message}) => {
-                alert(message);
                 closeCallback();
                 window.location.assign(`/orders`);
+                fetch(`/order/${id}`, {
+                    method: 'GET',
+                    headers: {
+                        'Authorization': `Bearer ${localStorage.getItem('token')}`
+                    }
+                })
+                    .then(data => data.json())
+                    .then(({_id, amount, paid, address, status, courier, createdBy, createdAt}) => {
+                        redux.getCurrentOrder(_id, amount, paid, address, status, courier, createdBy, createdAt);
+                    })
+                fetch(`/orderItems/${id}`, {
+                    method: 'GET',
+                    headers: {
+                        'Authorization': `Bearer ${localStorage.getItem('token')}`
+                    }
+                })
+                    .then(data => data.json())
+                    .then(orderItems => {
+                        redux.getOrderItems(orderItems);
+                    })
             })
             .catch(e => {
                 alert(e.message);
