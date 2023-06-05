@@ -14,26 +14,6 @@ const DeleteCurrentOrderModal = ({closeCallback, id, showDeleteOrderModal}) => {
             .then(({message}) => {
                 closeCallback();
                 window.location.assign(`/orders`);
-                fetch(`/order/${id}`, {
-                    method: 'GET',
-                    headers: {
-                        'Authorization': `Bearer ${localStorage.getItem('token')}`
-                    }
-                })
-                    .then(data => data.json())
-                    .then(({_id, amount, paid, address, status, courier, createdBy, createdAt}) => {
-                        redux.getCurrentOrder(_id, amount, paid, address, status, courier, createdBy, createdAt);
-                    })
-                fetch(`/orderItems/${id}`, {
-                    method: 'GET',
-                    headers: {
-                        'Authorization': `Bearer ${localStorage.getItem('token')}`
-                    }
-                })
-                    .then(data => data.json())
-                    .then(orderItems => {
-                        redux.getOrderItems(orderItems);
-                    })
             })
             .catch(e => {
                 alert(e.message);

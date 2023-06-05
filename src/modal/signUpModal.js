@@ -19,7 +19,7 @@ const SignUpModal = ({closeCallback}) => {
             alert('Длина пароля должна быть как минимум 6 символов');
             return;
         }
-        await fetch('/auth/signup', {
+        fetch('/auth/signup', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'

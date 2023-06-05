@@ -37,7 +37,6 @@ const EditCurrentCartModal = ({closeCallback, showEditCartModal, id}) => {
             })
                 .then(data => data.json())
                 .then(({message}) => {
-                    alert(message);
                     closeCallback();
                     fetch(`/cart/${id}`, {
                         method: 'GET',
