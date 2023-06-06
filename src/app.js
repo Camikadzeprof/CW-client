@@ -53,7 +53,7 @@ function App() {
                 .catch((e) => {
                     localStorage.removeItem('token');
                     socket.disconnect();
-                    alert('You session was ended, please log in again.');
+                    alert('Ваща сессия истекла. Войдите в аккаунт заново.');
                     toggleLogInModal(true);
                 })
         } else console.warn("Check request is passed")
