@@ -85,12 +85,11 @@ const CurrentOrder = () => {
                     <div className="card">
                         <div className="card-body">
                             <h5 className="card-title">{_id}</h5>
-                            <p className="card-text">{Number(amount).toFixed(2)} BYN</p>
+                            <p className="card-text">Сумма: {Number(amount).toFixed(2)} BYN</p>
                             {paid ? <p style={{color:"green"}} className="card-text">Оплачен</p> : <p style={{color:"red"}} className="card-text">Не оплачен</p>}
-                            <p className="card-text">{address}</p>
-                            <p className="card-text">{status}</p>
-                            {role === 'admin' ? <p className="card-text">{courier}</p> : null}
-                            <p className="card-text">{new Date(createdAt).toLocaleDateString('en-US')}</p>
+                            <p className="card-text">Адрес доставки: {address}</p>
+                            <p className="card-text">Статус: {status}</p>
+                            <p className="card-text">Добавлен: {new Date(createdAt).toLocaleDateString('en-US')}</p>
                         </div>
                     </div>
                     {orderItems && orderItems.map((orderItem, index) => (

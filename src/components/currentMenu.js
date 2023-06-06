@@ -60,8 +60,8 @@ const CurrentMenu = () => {
                         <div className="card-body">
                             <h5 className="card-title">{name}</h5>
                             <img src={img} width={200} height={200}/>
-                            <p className="card-text">{description}</p>
-                            <p className="card-text">{price} BYN</p>
+                            <p className="card-text">Описание: {description}</p>
+                            <p className="card-text">Цена: {price} BYN</p>
 
                         </div>
                     </div>

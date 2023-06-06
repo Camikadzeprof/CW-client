@@ -47,8 +47,9 @@ const CurrentCart = () => {
                     <div className="card">
                         <div className="card-body">
                             <h5 className="card-title">{food.name}</h5>
-                            <p className="card-text">{amount}</p>
-                            <p className="card-text">{quantity} BYN</p>
+                            <img src={food.img} width={200} height={200}/>
+                            <p className="card-text">Количество порций: {amount}</p>
+                            <p className="card-text">Сумма: {quantity} BYN</p>
                         </div>
                     </div>
                     <div className="btn-group" role="group" aria-label="Basic outlined example">
