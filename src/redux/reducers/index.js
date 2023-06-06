@@ -8,7 +8,6 @@ import menuReducer from "./menuReducer";
 import orderReducer from "./orderReducer";
 import orderItemReducer from "./orderItemReducer";
 import cartReducer from "./cartReducer";
-//import cartItemReducer from "./cartItemReducer";
 
 const rootReducer = combineReducers({
     user: userReducer,
