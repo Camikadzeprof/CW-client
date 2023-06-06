@@ -27,7 +27,7 @@ const AddMenuModal = ({closeCallback, showAddMenuModal}) => {
         })
             .then(data => data.json())
             .then(({message}) => {
-                if (message === 'Введите существующий тип')
+                if (message === 'Введите существующий тип' || message === 'Такое блюдо уже существует')
                     alert(message);
                 else {
                     closeCallback();
@@ -45,6 +45,7 @@ const AddMenuModal = ({closeCallback, showAddMenuModal}) => {
                             console.log(e.message)
                         })
                 }
+
             })
             .catch(e => {
                 alert(e.message)
