@@ -1,4 +1,3 @@
-export const CHANGE_USERNAME = "CHANGE_USERNAME";
 export const AUTHORIZATION = "AUTHORIZATION";
 export const ALL_USERS = "ALL_USERS";
 export const GET_USER_DATA = "GET_USER_DATA";
