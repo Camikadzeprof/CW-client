@@ -8,7 +8,8 @@ import * as OrderActions from '../../redux/actions/orderAction';
 import * as OrderItemActions from '../../redux/actions/orderItemAction';
 import {useDispatch} from "react-redux";
 import {bindActionCreators} from "redux";
-import * as CartActions from '../../redux/actions/cartAction'
+import * as CartActions from '../../redux/actions/cartAction';
+import * as CartItemActions from '../../redux/actions/cartItemAction';
 
 const actions = {
     ...UserActions,
@@ -19,7 +20,8 @@ const actions = {
     ...MenuActions,
     ...OrderActions,
     ...OrderItemActions,
-    ...CartActions
+    ...CartActions,
+    ...CartItemActions
 }
 const useActions = () => {
     const dispatch = useDispatch();

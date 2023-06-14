@@ -1,5 +1,5 @@
 import React, {useState} from 'react'
-import {NavLink, useHistory} from "react-router-dom";
+import {NavLink} from "react-router-dom";
 import {useSelector} from "react-redux";
 import useActions from "../helpers/hooks/useActions";
 import socket from "./socket";
@@ -10,8 +10,6 @@ import SignUpModal from "../modal/signUpModal";
 const Sidebar = (props) => {
     const [showLogInModal, toggleLogInModal] = useState(false);
     const [showSignUpModal, toggleSignUpModal] = useState(false);
-    const history = useHistory();
-    const redirect = (path) => history.push(path);
     const redux = useActions();
     const {id, username, email, phone, role} = useSelector(state => state.user);
     const logout = async () => {
@@ -20,14 +18,15 @@ const Sidebar = (props) => {
         }).then(res => res.json())
             .then(value => {
                 console.log(value.message);
-                localStorage.removeItem('token');
                 redux.logoutUser();
-                redux.clearCarts();
+                redux.clearCart();
+                redux.clearCartItems();
                 redux.clearOrders();
                 redux.clearOrderItems();
                 socket.emit("USER_DISCONNECTED", username);
                 socket.disconnect();
-                redirect('/');
+                localStorage.removeItem('token');
+                window.location.assign('/');
             })
     }
     return (

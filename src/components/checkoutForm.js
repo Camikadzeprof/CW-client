@@ -52,6 +52,9 @@ const CheckoutForm = ({success = () => {}, amount, orderId}) => {
                     console.log(response ? response.data : message);
                 })
         }
+        else {
+            alert('Проверьте правильность введённых данных');
+        }
     };
 
     return (

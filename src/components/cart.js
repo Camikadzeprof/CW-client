@@ -7,29 +7,38 @@ import AddOrderListModal from "../modal/addOrderListModal";
 const Cart = (props) => {
     const redux = useActions();
     const [showAddOrderListModal, toggleAddOrderListModal] = useState(false);
-    const [flag, setFlag] = useState(false);
     const {id} = useSelector(state => state.user);
     const token = localStorage.getItem('token');
     useEffect(() => {
         (async () => {
             if (token) {
-                fetch(`/carts/user/${id}`, {
+                fetch(`/cart/user/${id}`, {
                     method: 'GET',
                     headers: {
                         'Authorization': `Bearer ${token}`
                     }
                 })
                     .then(data => data.json())
-                    .then(carts => {
-                        if (carts.length !== 0) setFlag(true);
-                        else setFlag(false);
-                        redux.getCarts(carts);
+                    .then(({_id, amount, user}) => {
+                        if (_id !== '') {
+                            redux.getCart(_id, amount, user);
+                            fetch(`/cartItems/cart/${_id}`, {
+                                method: 'GET',
+                                headers: {
+                                    'Authorization': `Bearer ${token}`
+                                }
+                            })
+                                .then(data => data.json())
+                                .then(cartItems => {
+                                    redux.getCartItems(cartItems);
+                                })
+                        }
                     })
             }
         })()
     }, [])
     async function clear() {
-        fetch(`/carts/user/${id}`, {
+        fetch(`/cart/user/${id}`, {
             method: 'DELETE',
             headers: {
                 'Authorization': `Bearer ${token}`
@@ -38,12 +47,13 @@ const Cart = (props) => {
             .then(data => data.json())
             .then(({message}) => {
                 alert(message);
-                redux.clearCarts();
-                setFlag(false);
+                redux.clearCart();
+                redux.clearCartItems();
             })
     }
 
-    const {carts} = useSelector(state => state.cart);
+    const {_id, amount} = useSelector(state => state.cart);
+    const {cartItems} = useSelector(state => state.cartItem)
 
     return (
         <>
@@ -53,26 +63,31 @@ const Cart = (props) => {
                 <div className="info">
                     <h2>Корзина</h2>
                     <ul className="list-group">
-                        {carts && carts.map((cart, index) => (
+                        {cartItems && cartItems.map((cartItem, index) => (
                             <li key={index} className="list-group-item">
                                 <div id="list-span">
-                                    <span id="span_food">{cart.food.name}</span>
-                                    <span id="span_amount">{cart.amount}</span>
-                                    <span id="span_quantity">{cart.quantity} BYN</span>
+                                    <span id="span_food">{cartItem.food.name}</span>
+                                    <span id="span_amount">{cartItem.quantity}</span>
+                                    <span id="span_quantity">{Number(cartItem.amount).toFixed(2)} BYN</span>
                                 </div>
                                 <div className="btn-group" role="group" aria-label="Basic outlined example">
-                                    <NavLink to={`/cart/${cart._id}`} exact
+                                    <NavLink to={`/cartItem/${cartItem._id}`} exact
                                              className="btn btn-outline-primary">Показать</NavLink>
                                 </div>
                             </li>
                         ))}
                     </ul>
-                    {carts.length > 0 ? <button type="button" className="btn btn-success" onClick={() => {
+                    {cartItems.length > 0 ? <div className="card">
+                        <div className="card-body">
+                            <p className="card-text">Итого: {Number(amount).toFixed(2)} BYN</p>
+                        </div>
+                    </div> : null}
+                    {cartItems.length > 0 ? <button type="button" className="btn btn-success" onClick={() => {
                         toggleAddOrderListModal(true);
                     }}>Сделать заказ
                     </button> : <h5>Корзина пуста</h5>
                     }
-                    {carts.length > 0 ? <button type="button" className="btn btn-danger" onClick={() => clear()}>
+                    {cartItems.length > 0 ? <button type="button" className="btn btn-danger" onClick={() => clear()}>
                             Очистить корзину
                         </button> :
                         null

@@ -1,20 +1,23 @@
-import {ALL_CART, CART_CLEAR} from './actionTypes';
+import {ALL_CARTITEMS, CARTITEMS_CLEAR, CURRENT_CARTITEM} from './actionTypes';
 
 const initialState = {
     _id: '',
     food: '',
-    amount: '',
     quantity: '',
-    user: '',
-    carts: []
+    amount: '',
+    cart: '',
+    cartItems: []
 }
 
 const cartReducer = (state = initialState, action) => {
     switch (action.type) {
-        case ALL_CART: {
+        case ALL_CARTITEMS: {
             return {...state, ...action.payload};
         }
-        case CART_CLEAR: {
+        case CURRENT_CARTITEM: {
+            return {...state, ...action.payload};
+        }
+        case CARTITEMS_CLEAR: {
             return initialState;
         }
         default: {

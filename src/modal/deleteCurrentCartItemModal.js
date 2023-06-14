@@ -1,8 +1,8 @@
 import {Button, Modal} from "react-bootstrap";
 
-const DeleteCurrentCartModal = ({closeCallback, id, showDeleteCartModal}) => {
-    const deleteCartClick = async (id) => {
-        fetch(`/cart/${id}`, {
+const DeleteCurrentCartItemModal = ({closeCallback, id, showDeleteCartItemModal}) => {
+    const deleteCartItemClick = async (id) => {
+        fetch(`/cartItem/${id}`, {
             method: 'DELETE',
             headers: {
                 'Authorization': `Bearer ${localStorage.getItem('token')}`
@@ -21,7 +21,7 @@ const DeleteCurrentCartModal = ({closeCallback, id, showDeleteCartModal}) => {
     return(
         <>
             <Modal
-                show={showDeleteCartModal}
+                show={showDeleteCartItemModal}
                 backdrop="static"
                 keyboard={false}
             >
@@ -35,11 +35,11 @@ const DeleteCurrentCartModal = ({closeCallback, id, showDeleteCartModal}) => {
                     <Button variant="secondary" onClick={closeCallback}>
                         Закрыть
                     </Button>
-                    <Button variant="primary" onClick={() => deleteCartClick(id)}>Убрать</Button>
+                    <Button variant="primary" onClick={() => deleteCartItemClick(id)}>Убрать</Button>
                 </Modal.Footer>
             </Modal>
         </>
     )
 }
 
-export default DeleteCurrentCartModal;
+export default DeleteCurrentCartItemModal;

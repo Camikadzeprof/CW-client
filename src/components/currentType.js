@@ -16,7 +16,10 @@ const CurrentType = () => {
                     .then(({_id, name}) => {
                         redux.getCurrentType(_id, name);
                         fetch(`/menu/type/${name}`, {
-                            method: 'GET'
+                            method: 'GET',
+                            headers: {
+                                'Authorization': `Bearer ${localStorage.getItem('token')}`
+                            }
                         }).then(data => data.json())
                             .then((menus) => {
                                 redux.getMenu(menus);

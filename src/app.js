@@ -95,7 +95,7 @@ function App() {
                     <Route path="/cart" exact>
                         {!!username ? <Cart/> : <Error statusCode={'401'} statusMessage={'Неавторизован'} message={'Вы должны войти в свой аккаунт, чтобы работать с корзиной'}/>}
                     </Route>
-                    <Route path="/cart/:cartId" exact>
+                    <Route path="/cartItem/:cartItemId" exact>
                         {!!username ? <CurrentCart/> : <Error statusCode={'401'} statusMessage={'Неавторизован'} message={'Вы должны войти в свой аккаунт, чтобы работать с корзиной'}/>}
                     </Route>
                     <Route path="/order" exact>
@@ -123,7 +123,10 @@ function App() {
                             </Elements>
                             : <Error statusCode={'401'} statusMessage={'Неавторизован'} message={'Вы должны войти в свой аккаунт, чтобы платить за заказы'}/>}
                     </Route>
-                    <Redirect to="/order"/>
+                    <Route path="/error">
+                        <Error statusCode={'404'} statusMessage={'Не найдено'} message={'Страница не найдена'}/>
+                    </Route>
+                    <Redirect to="/error"/>
                 </Switch>
             </div>
         </BrowserRouter>

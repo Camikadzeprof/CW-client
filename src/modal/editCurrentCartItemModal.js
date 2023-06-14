@@ -3,50 +3,50 @@ import React, {useEffect, useState} from "react";
 import {useSelector} from "react-redux";
 import useActions from "../helpers/hooks/useActions";
 
-const EditCurrentCartModal = ({closeCallback, showEditCartModal, id}) => {
+const EditCurrentCartItemModal = ({closeCallback, showEditCartItemModal, id}) => {
     const redux = useActions();
     const [foodValue, setFoodValue] = useState('');
-    const [amountValue, setAmountValue] = useState('');
+    const [quantityValue, setQuantityValue] = useState('');
     const {userId} = useSelector(state => state.user);
     useEffect(() => {
         (async () => {
-            fetch(`/cart/${id}`, {
+            fetch(`/cartItem/${id}`, {
                 method: 'GET',
                 headers: {
                     'Authorization': `Bearer ${localStorage.getItem('token')}`
                 }
             })
                 .then(data => data.json())
-                .then(({_id, food, amount}) => {
-                    setAmountValue(amount)
+                .then(({_id, food, quantity}) => {
+                    setQuantityValue(quantity)
                 })
         })()
     }, [])
-    const editCartSubmit = async (e) => {
+    const editCartItemSubmit = async (e) => {
         e.preventDefault();
-        if (amountValue > 0) {
-            fetch(`/cart/${id}`, {
+        if (quantityValue > 0) {
+            fetch(`/cartItem/${id}`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
                     'Authorization': `Bearer ${localStorage.getItem('token')}`
                 },
                 body: JSON.stringify({
-                    amount: amountValue
+                    quantity: quantityValue
                 })
             })
                 .then(data => data.json())
                 .then(({message}) => {
                     closeCallback();
-                    fetch(`/cart/${id}`, {
+                    fetch(`/cartItem/${id}`, {
                         method: 'GET',
                         headers: {
                             'Authorization': `Bearer ${localStorage.getItem('token')}`
                         }
                     })
                         .then(data => data.json())
-                        .then(({_id, food, amount, quantity}) => {
-                            redux.getCurrentCart(_id, food, amount, quantity);
+                        .then(({_id, food, quantity, amount}) => {
+                            redux.getCurrentCartItem(_id, food, quantity, amount);
                         })
                 })
         }
@@ -55,20 +55,20 @@ const EditCurrentCartModal = ({closeCallback, showEditCartModal, id}) => {
     return (
         <>
             <Modal
-                show={showEditCartModal}
+                show={showEditCartItemModal}
                 backdrop="static"
                 keyboard={false}
             >
                 <Modal.Header>
                     <Modal.Title>Изменение корзины</Modal.Title>
                 </Modal.Header>
-                <form onSubmit={editCartSubmit}>
+                <form onSubmit={editCartItemSubmit}>
                     <Modal.Body>
                         <div className="mb-3">
                             <label htmlFor="amount-input" className="form-label">Количество порций</label>
                             <input type="number" className="form-control" id="amount-input"
-                                   placeholder="Кол-во" value={amountValue}
-                                   onChange={e => setAmountValue(e.target.value)}/>
+                                   placeholder="Кол-во" value={quantityValue}
+                                   onChange={e => setQuantityValue(e.target.value)}/>
                         </div>
                     </Modal.Body>
                     <Modal.Footer>
@@ -83,4 +83,4 @@ const EditCurrentCartModal = ({closeCallback, showEditCartModal, id}) => {
     )
 }
 
-export default EditCurrentCartModal;
+export default EditCurrentCartItemModal;

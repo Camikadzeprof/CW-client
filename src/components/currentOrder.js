@@ -112,6 +112,11 @@ const CurrentOrder = () => {
                         }}>Удалить
                         </button>}
                     </div> : null}
+                    {role === "user" && status === "Ожидает оплаты" ? <button type="button" style={{marginLeft: "5px"}} className="btn btn-danger" onClick={() => {
+                        setCurrentOrderIdValue(_id);
+                        toggleDeleteOrderModal(true);
+                    }}>Удалить
+                    </button> : null}
                     {role === "operator" && status !== "Выполнен" ? <div className="btn-group" role="group" aria-label="Basic outlined example">
                         {status === "Готов к доставке" || status === "Доставляется" ? null : <button type="button" className="btn btn-success" onClick={() => {
                             setCurrentOrderIdValue(_id);

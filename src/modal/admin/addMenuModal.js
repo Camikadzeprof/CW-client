@@ -65,20 +65,20 @@ const AddMenuModal = ({closeCallback, showAddMenuModal}) => {
                 <form onSubmit={addMenuSubmit}>
                     <Modal.Body>
                         <div className="mb3">
-                            <label htmlFor="name-input" className="form-label">Название блюда</label>
-                            <input type="text" className="form-control" name="name" id="name-input"
+                            <label htmlFor="name-input" className="form-label">*Название блюда</label>
+                            <input type="text" className="form-control" name="name" id="name-input" required="true"
                                    placeholder="Название" value={nameValue}
                                    onChange={(event) => setNameValue(event.target.value)}/>
                         </div>
                         <div className="mb3">
-                            <label htmlFor="type-input" className="form-label">Тип блюда</label>
-                            <input type="text" className="form-control" name="name" id="type-input"
+                            <label htmlFor="type-input" className="form-label">*Тип блюда</label>
+                            <input type="text" className="form-control" name="name" id="type-input" required="true"
                                    placeholder="Тип" value={typeValue}
                                    onChange={(event) => setTypeValue(event.target.value)}/>
                         </div>
                         <div className="mb3">
-                            <label htmlFor="img-input" className="form-label">изображение</label>
-                            <input type="text" className="form-control" id="img-input"
+                            <label htmlFor="img-input" className="form-label">*Изображение</label>
+                            <input type="text" className="form-control" id="img-input" required="true"
                                    aria-describedby="imgHelp" value={imgValue}
                                    onChange={e => setImgValue(e.target.value)}/>
                             <div id="imgHelp" className="form-text">Введите URL изображения.
@@ -91,11 +91,12 @@ const AddMenuModal = ({closeCallback, showAddMenuModal}) => {
                                    onChange={e => setDescriptionValue(e.target.value)}/>
                         </div>
                         <div className="mb-3">
-                            <label htmlFor="price-input" className="form-label">Цена</label>
-                            <input type="text" className="form-control" id="price-input"
+                            <label htmlFor="price-input" className="form-label">*Цена</label>
+                            <input type="text" className="form-control" id="price-input" required="true"
                                    placeholder="Цена" pattern="^[0-9]*[.]?[0-9]+$" value={priceValue}
                                    onChange={e => setPriceValue(e.target.value)}/> BYN
                         </div>
+                        *Поля, обязательные для заполнения
                     </Modal.Body>
                     <Modal.Footer>
                         <input className="btn btn-success" type="submit" value="Добавить"/>

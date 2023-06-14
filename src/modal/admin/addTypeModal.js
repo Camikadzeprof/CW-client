@@ -19,14 +19,19 @@ const AddTypeModal = ({closeCallback, showAddTypeModal}) => {
         })
             .then(data => data.json())
             .then(({message}) => {
-                closeCallback();
-                fetch('/type', {
-                    method: 'GET'
-                })
-                    .then(data => data.json())
-                    .then(types => {
-                        redux.getTypes(types);
+                if (message === 'Тип успешно добавлен') {
+                    closeCallback();
+                    fetch('/type', {
+                        method: 'GET'
                     })
+                        .then(data => data.json())
+                        .then(types => {
+                            redux.getTypes(types);
+                        })
+                }
+                else {
+                    alert(message);
+                }
             })
             .catch(e => {
                 alert(e.message)
@@ -45,7 +50,7 @@ const AddTypeModal = ({closeCallback, showAddTypeModal}) => {
                 <form onSubmit={addTypeSubmit}>
                     <Modal.Body>
                         <label htmlFor="type-input" className="form-label">Название типа</label>
-                        <input type="text" className="form-control" name="type" id="type-input"
+                        <input type="text" className="form-control" name="type" id="type-input" required="true"
                                placeholder="Название" value={nameValue}
                                onChange={(event) => setNameValue(event.target.value)}/>
                     </Modal.Body>

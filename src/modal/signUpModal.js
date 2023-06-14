@@ -51,7 +51,7 @@ const SignUpModal = ({closeCallback}) => {
                             <div className="mb-3">
                                 <div className="mb-3">
                                     <label htmlFor="email-input" className="form-label">Email адрес</label>
-                                    <input type="email" className="form-control" id="email-input"
+                                    <input type="email" className="form-control" id="email-input" required="true"
                                            aria-describedby="emailHelp"
                                            value={email} onChange={e => setEmail(e.target.value)}/>
                                     <div id="emailHelp" className="form-text">Мы не будем разглашать ваш e-mail адрес кому-либо.
@@ -70,7 +70,7 @@ const SignUpModal = ({closeCallback}) => {
                         <div className="col order-1">
                             <div className="mb-3">
                                 <label htmlFor="login-input" className="form-label">Логин</label>
-                                <input type="text" className="form-control" id="login-input" placeholder="Логин"
+                                <input type="text" className="form-control" id="login-input" placeholder="Логин" required="true"
                                        value={login} onChange={e => setLogin(e.target.value)}/>
                                 <div className="mb-3">
                                     <label htmlFor="password-input" className="form-label">Пароль</label>
@@ -86,6 +86,9 @@ const SignUpModal = ({closeCallback}) => {
                                 </div>
                             </div>
                         </div>
+                    </div>
+                    <div className="row">
+                        <label htmlFor="login-input" className="form-text">Все поля обязательны для заполнения</label>
                     </div>
                     <input className="btn btn-success" type="submit" value="Зарегистрироваться"/>
                 </div>

@@ -170,7 +170,7 @@ const AdminPanel = (props) => {
                                     <span id="span_description">{menu.description}</span>
                                 </div>
                                 <div id="list-span">
-                                    <span id="span_price">{menu.price} BYN</span>
+                                    <span id="span_price">{Number(menu.price).toFixed(2)} BYN</span>
                                 </div>
                                 <div className="btn-group" role="group" aria-label="Basic outlined example">
                                     <button type="button" className="btn btn-outline-primary" onClick={() => {

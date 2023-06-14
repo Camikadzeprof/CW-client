@@ -1,20 +1,12 @@
-import {ALL_CARTS, CART_CLEAR, CURRENT_CART} from '../reducers/actionTypes';
+import {ALL_CART, CART_CLEAR} from '../reducers/actionTypes';
 
-export const getCarts = (obj) => (dispatch) => {
+export const getCart = (_id, amount, user) => (dispatch) => {
     try {
-        dispatch({type: ALL_CARTS, payload: {carts: obj}});
+        dispatch({type: ALL_CART, payload: {_id, amount, user}});
     } catch (e) {
-        dispatch({type: ALL_CARTS, payload: {carts: null}});
+        dispatch({type: ALL_CART, payload: {_id: null, amount: null, user: null}});
     }
 }
-export const getCurrentCart = (_id, food, amount, quantity, user) => (dispatch) => {
-    try {
-        dispatch({type: CURRENT_CART, payload: {_id, food, amount, quantity, user}});
-    } catch (e) {
-        dispatch({type: CURRENT_CART, payload: {_id: null, food: null, amount: null, quantity: null, user: null}});
-    }
-}
-
-export const clearCarts = () => (dispatch) => {
+export const clearCart = () => (dispatch) => {
     dispatch({type: CART_CLEAR, payload: null})
 }

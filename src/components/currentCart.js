@@ -2,45 +2,45 @@ import {useParams} from "react-router-dom";
 import React, {useEffect, useState} from "react";
 import useActions from "../helpers/hooks/useActions";
 import {useSelector} from "react-redux";
-import EditCurrentCartModal from "../modal/editCurrentCartModal";
-import DeleteCurrentCartModal from "../modal/deleteCurrentCartModal";
+import EditCurrentCartItemModal from "../modal/editCurrentCartItemModal";
+import DeleteCurrentCartItemModal from "../modal/deleteCurrentCartItemModal";
 import AddOrderModal from "../modal/addOrderModal";
 
 const CurrentCart = () => {
-    const [showEditCartModal, toggleEditCartModal] = useState(false);
-    const [showDeleteCartModal, toggleDeleteCartModal] = useState(false);
+    const [showEditCartItemModal, toggleEditCartItemModal] = useState(false);
+    const [showDeleteCartItemModal, toggleDeleteCartItemModal] = useState(false);
     const [showAddOrderModal, toggleAddOrderModal] = useState(false);
-    const [currentCartIdValue, setCurrentCartIdValue] = useState(null);
+    const [currentCartItemIdValue, setCurrentCartItemIdValue] = useState(null);
     const redux = useActions();
-    const {cartId} = useParams();
-    const {id} = useSelector(state => state.user);
+    const {cartItemId} = useParams();
+    const {id} = useSelector(state => state.cart);
 
     useEffect(() => {
         (async () => {
-            fetch(`/cart/${cartId}`, {
+            fetch(`/cartItem/${cartItemId}`, {
                 method: 'GET',
                 headers: {
                     'Authorization': `Bearer ${localStorage.getItem('token')}`
                 }
             })
                 .then(data => data.json())
-                .then(({_id, food, amount, quantity}) => {
-                    redux.getCurrentCart(_id, food, amount, quantity);
+                .then(({_id, food, quantity, amount}) => {
+                    redux.getCurrentCartItem(_id, food, quantity, amount);
                 })
         })()
     }, [])
-    const {_id, food, amount, quantity} = useSelector(state => state.cart);
+    const {_id, food, quantity, amount} = useSelector(state => state.cartItem);
 
     return (
         <>
-            {showEditCartModal ? <EditCurrentCartModal closeCallback={() => toggleEditCartModal(false)}
-                                                showEditCartModal={showEditCartModal}
-                                                id={currentCartIdValue}/> : null}
-            {showDeleteCartModal ?
-                <DeleteCurrentCartModal closeCallback={() => toggleDeleteCartModal(false)} id={currentCartIdValue}
-                                        showDeleteCartModal={showDeleteCartModal}/> : null}
+            {showEditCartItemModal ? <EditCurrentCartItemModal closeCallback={() => toggleEditCartItemModal(false)}
+                                                               showEditCartItemModal={showEditCartItemModal}
+                                                               id={currentCartItemIdValue}/> : null}
+            {showDeleteCartItemModal ?
+                <DeleteCurrentCartItemModal closeCallback={() => toggleDeleteCartItemModal(false)} id={currentCartItemIdValue}
+                                            showDeleteCartItemModal={showDeleteCartItemModal}/> : null}
             {showAddOrderModal ?
-                <AddOrderModal closeCallback={() => toggleAddOrderModal(false)} cartId={currentCartIdValue}
+                <AddOrderModal closeCallback={() => toggleAddOrderModal(false)} cartItemId={currentCartItemIdValue}
                                         showAddOrderModal={showAddOrderModal}/> : null}
             <div className="main_content">
                 <div className="info">
@@ -48,24 +48,24 @@ const CurrentCart = () => {
                         <div className="card-body">
                             <h5 className="card-title">{food.name}</h5>
                             <img src={food.img} width={200} height={200}/>
-                            <p className="card-text">Количество порций: {amount}</p>
-                            <p className="card-text">Сумма: {quantity} BYN</p>
+                            <p className="card-text">Количество порций: {quantity}</p>
+                            <p className="card-text">Сумма: {Number(amount).toFixed(2)} BYN</p>
                         </div>
                     </div>
                     <div className="btn-group" role="group" aria-label="Basic outlined example">
                         <button type="button" className="btn btn-success" onClick={() => {
-                            setCurrentCartIdValue(_id);
+                            setCurrentCartItemIdValue(_id);
                             toggleAddOrderModal(true);
                         }}>Сделать заказ
                         </button>
                         <button type="button" style={{marginLeft: "5px"}} className="btn btn-success" onClick={() => {
-                            setCurrentCartIdValue(_id);
-                            toggleEditCartModal(true);
+                            setCurrentCartItemIdValue(_id);
+                            toggleEditCartItemModal(true);
                         }}>Редактировать
                         </button>
                         <button type="button" style={{marginLeft: "5px"}} className="btn btn-danger" onClick={() => {
-                            setCurrentCartIdValue(_id);
-                            toggleDeleteCartModal(true);
+                            setCurrentCartItemIdValue(_id);
+                            toggleDeleteCartItemModal(true);
                         }}>Удалить
                         </button>
                     </div>
